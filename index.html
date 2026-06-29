@@ -1,1 +1,441 @@
-a
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT & Gemini 프롬프트 수업</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <nav class="nav">
+      <a href="#intro">수업소개</a>
+      <a href="#compare">도구비교</a>
+      <a href="#structure">프롬프트 구조</a>
+      <a href="#practice">실습프롬프트</a>
+      <a href="#wrapup">마무리</a>
+    </nav>
+
+    <div class="hero-inner">
+      <p class="eyebrow">AI Prompt Engineering Class</p>
+      <h1>ChatGPT와 Gemini로 배우는<br />생활밀착형 프롬프트 실습</h1>
+      <p class="hero-desc">
+        20대부터 60대까지 누구나 관심을 가질 수 있는 여행, 업무, 취업, 건강, 생활비, 스마트폰 활용 주제로
+        생성형 AI의 특징과 프롬프트 기본 구조를 익혀봅니다.
+      </p>
+
+      <div class="hero-meta">
+        <span>1.5H 수업</span>
+        <span>이론 + 실습</span>
+        <span>초보자 가능</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="intro" class="section intro-section">
+      <div class="section-title">
+        <p class="number">01</p>
+        <h2>오늘 수업에서 배우는 것</h2>
+        <p>
+          AI를 단순히 사용하는 것을 넘어, 원하는 결과가 나오도록 질문을 설계하는 방법을 실습합니다.
+        </p>
+      </div>
+
+      <div class="goal-grid">
+        <article class="goal-card">
+          <span class="icon">💬</span>
+          <h3>ChatGPT와 Gemini 이해</h3>
+          <p>두 도구의 차이와 활용 상황을 비교하며, 어떤 작업에 어떤 도구가 어울리는지 파악합니다.</p>
+        </article>
+        <article class="goal-card">
+          <span class="icon">🧩</span>
+          <h3>프롬프트 6요소 학습</h3>
+          <p>역할, 목적, 대상, 상황, 조건, 출력 형식을 넣어 더 정확한 답변을 얻는 방법을 배웁니다.</p>
+        </article>
+        <article class="goal-card">
+          <span class="icon">📌</span>
+          <h3>생활 속 주제 실습</h3>
+          <p>여행 계획, 업무 메일, 건강 습관, 자기소개서, 스마트폰 활용 등 실생활 예시로 연습합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="compare" class="section">
+      <div class="section-title">
+        <p class="number">02</p>
+        <h2>ChatGPT와 Gemini 특징 비교</h2>
+        <p>두 도구는 경쟁 관계라기보다, 목적에 따라 함께 활용하면 좋은 AI 도구입니다.</p>
+      </div>
+
+      <div class="compare-wrap">
+        <article class="tool-card chatgpt">
+          <div class="tool-head">
+            <span class="tool-label">ChatGPT</span>
+            <h3>대화하며 글과 아이디어를 만들어주는 AI</h3>
+          </div>
+          <ul>
+            <li>문서 작성, 문장 다듬기, 아이디어 정리에 활용하기 좋습니다.</li>
+            <li>역할과 말투를 지정하면 원하는 분위기의 결과물을 얻기 쉽습니다.</li>
+            <li>수업 자료, 보고서, 자기소개서, 안내문, 블로그 글 작성에 적합합니다.</li>
+          </ul>
+        </article>
+
+        <article class="tool-card gemini">
+          <div class="tool-head">
+            <span class="tool-label">Gemini</span>
+            <h3>자료를 읽고 분석하고 정리하는 데 유용한 AI</h3>
+          </div>
+          <ul>
+            <li>문서, 이미지, 자료 분석과 요약에 활용하기 좋습니다.</li>
+            <li>Google 계정 기반 환경에서 접근성이 좋습니다.</li>
+            <li>여행 자료, 구매 비교표, 수업 자료, 이미지 분석 실습에 적합합니다.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>ChatGPT</th>
+              <th>Gemini</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>쉽게 말하면</td>
+              <td>대화하며 글과 아이디어를 만드는 AI</td>
+              <td>자료를 읽고 분석·정리하는 데 유용한 AI</td>
+            </tr>
+            <tr>
+              <td>잘하는 작업</td>
+              <td>글쓰기, 문장 수정, 계획 세우기, 아이디어 제안</td>
+              <td>문서 요약, 자료 분석, 이미지·파일 분석</td>
+            </tr>
+            <tr>
+              <td>생활 활용</td>
+              <td>여행 계획, 자기소개서, 블로그 글, 안내문 작성</td>
+              <td>구매 비교표, 이미지 분석, 문서 요약, 자료 정리</td>
+            </tr>
+            <tr>
+              <td>주의할 점</td>
+              <td>조건이 부족하면 답변이 일반적으로 나올 수 있음</td>
+              <td>자료 내용과 AI 추론 내용을 구분해서 확인해야 함</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="structure" class="section dark-section">
+      <div class="section-title light">
+        <p class="number">03</p>
+        <h2>프롬프트 기본 구조</h2>
+        <p>프롬프트는 AI에게 일을 부탁하는 지시서입니다. 무엇을, 누구를 위해, 어떤 형식으로 만들지 알려줘야 합니다.</p>
+      </div>
+
+      <div class="structure-grid">
+        <article>
+          <span>1</span>
+          <h3>역할</h3>
+          <p>AI가 어떤 입장에서 답변할지 정합니다.</p>
+          <em>예: 여행 플래너, 취업 코치, 건강 관리 도우미</em>
+        </article>
+        <article>
+          <span>2</span>
+          <h3>목적</h3>
+          <p>무엇을 만들거나 해결해야 하는지 정합니다.</p>
+          <em>예: 일정 만들기, 문장 다듬기, 표 정리하기</em>
+        </article>
+        <article>
+          <span>3</span>
+          <h3>대상</h3>
+          <p>누구를 위한 결과물인지 정합니다.</p>
+          <em>예: 20대 취업 준비생, 60대 스마트폰 초보자</em>
+        </article>
+        <article>
+          <span>4</span>
+          <h3>상황</h3>
+          <p>현재 어떤 배경이나 문제가 있는지 설명합니다.</p>
+          <em>예: 가족 여행을 준비 중이다</em>
+        </article>
+        <article>
+          <span>5</span>
+          <h3>조건</h3>
+          <p>포함할 내용, 제외할 내용, 말투, 분량을 정합니다.</p>
+          <em>예: 쉬운 말, 5줄 이내, 표로 작성</em>
+        </article>
+        <article>
+          <span>6</span>
+          <h3>출력 형식</h3>
+          <p>결과물을 어떤 형태로 받을지 지정합니다.</p>
+          <em>예: 표, 목록, 안내문, 체크리스트</em>
+        </article>
+      </div>
+
+      <div class="formula-box">
+        <p class="formula-title">기본 프롬프트 공식</p>
+        <pre><code>너는 [역할]이야.
+나는 [상황] 때문에 [목적]이 필요해.
+대상은 [대상]이야.
+조건은 [조건]이야.
+결과는 [출력 형식]으로 작성해줘.</code></pre>
+      </div>
+    </section>
+
+    <section id="practice" class="section">
+      <div class="section-title">
+        <p class="number">04</p>
+        <h2>실습 프롬프트</h2>
+        <p>20대~60대가 모두 관심을 가질 수 있는 생활밀착형 주제로 직접 입력해봅니다.</p>
+      </div>
+
+      <div class="prompt-list">
+        <article class="prompt-card">
+          <div class="prompt-top">
+            <span>실습 1</span>
+            <h3>나쁜 프롬프트와 좋은 프롬프트 비교</h3>
+          </div>
+          <div class="bad-good">
+            <div>
+              <p class="mini-title">나쁜 프롬프트</p>
+              <pre><code>가족 여행 일정 짜줘.</code></pre>
+            </div>
+            <div>
+              <p class="mini-title">좋은 프롬프트</p>
+              <pre><code>너는 가족 여행 전문 플래너야.
+
+나는 부모님과 함께 1박 2일 국내 여행을 준비하고 있어.
+대상은 40대 자녀와 60대 부모님이 함께하는 가족 여행이야.
+
+조건은 다음과 같아.
+1. 너무 많이 걷지 않는 일정
+2. 식사 시간 포함
+3. 중간에 쉴 수 있는 카페 또는 휴식 장소 포함
+4. 사진 찍기 좋은 장소 포함
+5. 무리한 이동은 제외
+
+결과는 시간대별 일정표로 작성해줘.
+마지막에는 준비물 체크리스트도 함께 작성해줘.</code></pre>
+            </div>
+          </div>
+        </article>
+
+        <article class="prompt-card">
+          <div class="prompt-top">
+            <span>실습 2</span>
+            <h3>20대 관심 주제: 취업 준비</h3>
+          </div>
+          <pre><code>너는 취업 준비생을 돕는 자기소개서 코치야.
+
+나는 신입 디자이너 또는 사무직 취업을 준비하고 있어.
+
+아래 내용을 바탕으로 자기소개서 문장을 자연스럽게 다듬어줘.
+
+[내가 작성한 문장]
+저는 성실하고 책임감이 강하며 맡은 일을 끝까지 하려고 노력합니다.
+
+조건은 다음과 같아.
+1. 너무 흔한 표현은 줄이기
+2. 실제 경험이 들어갈 수 있도록 문장 방향 제안하기
+3. 신입 지원자에게 어울리는 말투 사용
+4. 과장된 표현은 제외
+5. 수정 문장 3개 제안
+
+결과는 표로 작성해줘.</code></pre>
+        </article>
+
+        <article class="prompt-card">
+          <div class="prompt-top">
+            <span>실습 3</span>
+            <h3>30대 관심 주제: 업무 메일 작성</h3>
+          </div>
+          <pre><code>너는 직장인을 돕는 비즈니스 문서 작성 전문가야.
+
+나는 거래처에 일정 변경 안내 메일을 보내야 해.
+
+상황은 다음과 같아.
+회의 일정이 기존 금요일 오후 2시에서 다음 주 월요일 오전 10시로 변경되었어.
+
+조건은 다음과 같아.
+1. 정중한 말투
+2. 너무 길지 않게 작성
+3. 변경 사유는 간단하게 표현
+4. 상대방에게 확인 요청 포함
+5. 제목도 함께 작성
+
+결과는 이메일 형식으로 작성해줘.</code></pre>
+        </article>
+
+        <article class="prompt-card">
+          <div class="prompt-top">
+            <span>실습 4</span>
+            <h3>40대 관심 주제: 생활비 정리</h3>
+          </div>
+          <pre><code>너는 가계부 정리를 도와주는 생활비 관리 도우미야.
+
+나는 한 달 생활비를 점검하고 싶어.
+항목은 식비, 교통비, 통신비, 쇼핑비, 교육비, 여가비야.
+
+조건은 다음과 같아.
+1. 고정비와 변동비를 구분
+2. 줄일 수 있는 항목 제안
+3. 무리한 절약 방법은 제외
+4. 가족 생활 기준으로 현실적인 조언 제공
+5. 표로 정리
+
+결과는 생활비 점검표와 절약 팁으로 작성해줘.</code></pre>
+        </article>
+
+        <article class="prompt-card">
+          <div class="prompt-top">
+            <span>실습 5</span>
+            <h3>50대 관심 주제: 건강 습관 만들기</h3>
+          </div>
+          <pre><code>너는 생활 습관 개선을 도와주는 건강 관리 코치야.
+
+나는 무리하지 않고 건강 습관을 만들고 싶어.
+대상은 50대 직장인 또는 주부야.
+
+조건은 다음과 같아.
+1. 하루 20분 안에 실천 가능
+2. 어려운 운동은 제외
+3. 식사, 수면, 걷기 습관 포함
+4. 병원 진단처럼 단정하지 않기
+5. 실천 가능한 행동 중심으로 작성
+
+결과는 7일 실천 계획표로 작성해줘.</code></pre>
+        </article>
+
+        <article class="prompt-card">
+          <div class="prompt-top">
+            <span>실습 6</span>
+            <h3>60대 관심 주제: 스마트폰 활용</h3>
+          </div>
+          <pre><code>너는 스마트폰 사용을 쉽게 알려주는 친절한 강사야.
+
+대상은 스마트폰 사용이 익숙하지 않은 60대 학습자야.
+카카오톡으로 사진을 보내는 방법을 설명해줘.
+
+조건은 다음과 같아.
+1. 어려운 용어 사용하지 않기
+2. 단계별로 설명하기
+3. 버튼 이름을 쉽게 표현하기
+4. 실수하기 쉬운 부분도 함께 안내하기
+5. 마지막에 연습 과제 1개 제안
+
+결과는 번호 목록으로 작성해줘.</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section accent-section">
+      <div class="section-title">
+        <p class="number">05</p>
+        <h2>ChatGPT와 Gemini 답변 비교 실습</h2>
+        <p>같은 프롬프트를 두 도구에 입력하고 결과의 차이를 비교합니다.</p>
+      </div>
+
+      <div class="prompt-card single">
+        <div class="prompt-top">
+          <span>공통 입력 프롬프트</span>
+          <h3>전 연령대 AI 활용 사례 추천</h3>
+        </div>
+        <pre><code>너는 생활 속 AI 활용법을 알려주는 친절한 강사야.
+
+20대부터 60대까지 누구나 사용할 수 있는 AI 활용 사례를 추천해줘.
+
+다음 기준으로 정리해줘.
+1. 연령대
+2. 관심 주제
+3. AI로 할 수 있는 일
+4. 예시 프롬프트
+5. 실습 난이도
+
+조건은 다음과 같아.
+1. 너무 어려운 기술 설명은 제외
+2. 일상생활과 업무에 바로 쓸 수 있는 예시 중심
+3. 각 연령대별로 2개씩 추천
+4. 결과는 표로 작성</code></pre>
+      </div>
+
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>비교 항목</th>
+              <th>ChatGPT 답변</th>
+              <th>Gemini 답변</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>이해하기 쉬운가?</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>예시가 현실적인가?</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>따라 하기 쉬운가?</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>표 구성이 보기 좋은가?</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>다시 사용하고 싶은 답변은?</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="wrapup" class="section wrapup">
+      <div class="section-title light">
+        <p class="number">06</p>
+        <h2>오늘의 핵심 정리</h2>
+        <p>좋은 답변은 좋은 프롬프트에서 시작됩니다.</p>
+      </div>
+
+      <div class="summary-grid">
+        <div>
+          <h3>오늘 기억할 6가지</h3>
+          <ol>
+            <li>AI에게 역할을 정해줍니다.</li>
+            <li>내가 원하는 목적을 정확히 말합니다.</li>
+            <li>대상과 상황을 설명합니다.</li>
+            <li>조건을 구체적으로 작성합니다.</li>
+            <li>결과 형식을 미리 정합니다.</li>
+            <li>첫 답변이 부족하면 다시 수정 요청합니다.</li>
+          </ol>
+        </div>
+
+        <div class="next-box">
+          <p class="next-label">다음 수업</p>
+          <h3>나만의 AI 비서 만들기</h3>
+          <p>
+            오늘 배운 프롬프트 작성법을 바탕으로, 반복적으로 사용할 수 있는 맞춤형 챗봇 또는 AI 비서 제작 실습을 진행합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>AI Prompt Engineering Class · ChatGPT & Gemini Basic Practice</p>
+  </footer>
+</body>
+</html>
