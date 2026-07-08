@@ -4,456 +4,93 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT & Gemini 프롬프트 수업</title>
-  <link rel="stylesheet" href="./style.css" />
   <style>
-    .research-topic-section{background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%)}
-    .topic-guide{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}
-    .topic-guide-box{padding:24px;border:1px solid var(--line);border-radius:20px;background:#fbfcff}
-    .topic-guide-box h3{margin:0 0 12px;font-size:22px;letter-spacing:-.03em}
-    .topic-guide-box ol{margin:0;padding-left:20px;color:var(--muted)}
-    .topic-guide-box li{margin-bottom:6px}
-    .topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .topic-card{display:flex;flex-direction:column;gap:14px;padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05);cursor:pointer;transition:.2s ease}
-    .topic-card:hover{transform:translateY(-2px);border-color:#b9c6ff;box-shadow:0 18px 36px rgba(36,87,255,.1)}
-    .topic-card.selected{border-color:#2457ff;background:linear-gradient(180deg,#fff 0%,#f5f8ff 100%);box-shadow:0 18px 40px rgba(36,87,255,.15)}
-    .topic-tag{display:inline-flex;align-self:flex-start;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:900;background:var(--soft-blue);color:var(--blue)}
-    .topic-tag.digital{background:var(--soft-violet);color:var(--violet)}
-    .topic-tag.health{background:#eafbf5;color:#008c6f}
-    .topic-tag.culture{background:#fff0f6;color:#d6336c}
-    .topic-tag.life{background:#fff4e6;color:#e67700}
-    .topic-card h3{margin:0;font-size:22px;line-height:1.35;letter-spacing:-.03em}
-    .topic-card p{margin:0;color:var(--muted)}
-    .selected-prompt-box{margin-bottom:28px}
-    .selected-prompt-help{margin:0 0 14px;color:var(--muted)}
-    .copyable-code{position:relative;margin:0}
-    .copyable-code pre{padding-right:64px!important}
-    .code-copy-btn{position:absolute;top:14px;right:14px;z-index:10;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;transition:.2s ease;backdrop-filter:blur(8px)}
-    .code-copy-btn:hover{background:rgba(255,255,255,.18);transform:translateY(-1px)}
-    .code-copy-btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
-    .code-copy-btn.copied{background:#00b894;border-color:#00b894;color:#fff}
-    @media(max-width:980px){.topic-guide,.topic-grid{grid-template-columns:1fr}}
+    body{margin:0;font-family:Arial,'Noto Sans KR',sans-serif;background:#f8fbff;color:#111827}
+    .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+    .loading-box{max-width:520px;padding:32px;border-radius:24px;background:#fff;box-shadow:0 16px 40px rgba(23,24,33,.08)}
+    .loading-box h1{margin:0 0 12px;font-size:28px;letter-spacing:-.04em}
+    .loading-box p{margin:0;color:#596276;line-height:1.7}
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-bg"></div>
-    <nav class="nav">
-      <a href="#intro">수업소개</a>
-      <a href="#compare">도구비교</a>
-      <a href="#structure">프롬프트 구조</a>
-      <a href="#practice">실습프롬프트</a>
-      <a href="#research-topics">딥리서치주제</a>
-      <a href="#day-plan">1·2일차</a>
-      <a href="https://drive.google.com/drive/folders/16zOd2nfsilMRVi47mbIcpB_9SIvhk3VB?usp=sharing" target="_blank" rel="noopener noreferrer">예제드라이브</a>
-      <a href="#wrapup">마무리</a>
-    </nav>
-
-    <div class="hero-inner">
-      <p class="eyebrow">AI Prompt Engineering Class</p>
-      <h1>ChatGPT와 Gemini로 배우는<br />생활밀착형 프롬프트 실습</h1>
-      <p class="hero-desc">
-        20대부터 60대까지 누구나 관심을 가질 수 있는 여행, 업무, 취업, 건강, 생활비, 스마트폰 활용 주제로
-        생성형 AI의 특징과 프롬프트 기본 구조를 익혀봅니다.
-      </p>
-
-      <div class="hero-meta">
-        <span>1.5H 수업</span>
-        <span>이론 + 실습</span>
-        <span>초보자 가능</span>
-      </div>
-
-      <div class="hero-actions">
-        <a class="drive-btn drive-btn-hero" href="https://drive.google.com/drive/folders/16zOd2nfsilMRVi47mbIcpB_9SIvhk3VB?usp=sharing" target="_blank" rel="noopener noreferrer">📁 수업 실습 예제 드라이브 바로가기</a>
-      </div>
+  <div class="loading">
+    <div class="loading-box">
+      <h1>수업페이지를 불러오는 중입니다</h1>
+      <p>기존 수업페이지 내용을 유지하고 브랜드 기획 실습 프롬프트 섹션을 추가합니다.</p>
     </div>
-  </header>
-
-  <main>
-    <section id="intro" class="section intro-section">
-      <div class="section-title">
-        <p class="number">01</p>
-        <h2>오늘 수업에서 배우는 것</h2>
-        <p>AI를 단순히 사용하는 것을 넘어, 원하는 결과가 나오도록 질문을 설계하는 방법을 실습합니다.</p>
-      </div>
-
-      <div class="goal-grid">
-        <article class="goal-card"><span class="icon">💬</span><h3>ChatGPT와 Gemini 이해</h3><p>두 도구의 차이와 활용 상황을 비교하며, 어떤 작업에 어떤 도구가 어울리는지 파악합니다.</p></article>
-        <article class="goal-card"><span class="icon">🧩</span><h3>프롬프트 6요소 학습</h3><p>역할, 목적, 대상, 상황, 조건, 출력 형식을 넣어 더 정확한 답변을 얻는 방법을 배웁니다.</p></article>
-        <article class="goal-card"><span class="icon">📌</span><h3>생활 속 주제 실습</h3><p>여행 계획, 업무 메일, 건강 습관, 자기소개서, 스마트폰 활용 등 실생활 예시로 연습합니다.</p></article>
-      </div>
-
-      <div class="resource-banner">
-        <div>
-          <p class="resource-label">실습 자료</p>
-          <h3>수업 실습 예제 드라이브</h3>
-          <p>영수증 이미지, 냉장고 사진 등 실습에 사용할 예제 자료를 열어두고 수업을 진행합니다.</p>
-        </div>
-        <a class="drive-btn" href="https://drive.google.com/drive/folders/16zOd2nfsilMRVi47mbIcpB_9SIvhk3VB?usp=sharing" target="_blank" rel="noopener noreferrer">예제 자료 열기</a>
-      </div>
-    </section>
-
-    <section id="compare" class="section">
-      <div class="section-title"><p class="number">02</p><h2>ChatGPT와 Gemini 특징 비교</h2><p>두 도구는 경쟁 관계라기보다, 목적에 따라 함께 활용하면 좋은 AI 도구입니다.</p></div>
-      <div class="compare-wrap">
-        <article class="tool-card chatgpt"><div class="tool-head"><span class="tool-label">ChatGPT</span><h3>대화하며 글과 아이디어를 만들어주는 AI</h3></div><ul><li>문서 작성, 문장 다듬기, 아이디어 정리에 활용하기 좋습니다.</li><li>역할과 말투를 지정하면 원하는 분위기의 결과물을 얻기 쉽습니다.</li><li>수업 자료, 보고서, 자기소개서, 안내문, 블로그 글 작성에 적합합니다.</li></ul></article>
-        <article class="tool-card gemini"><div class="tool-head"><span class="tool-label">Gemini</span><h3>자료를 읽고 분석하고 정리하는 데 유용한 AI</h3></div><ul><li>문서, 이미지, 자료 분석과 요약에 활용하기 좋습니다.</li><li>Google 계정 기반 환경에서 접근성이 좋습니다.</li><li>여행 자료, 구매 비교표, 수업 자료, 이미지 분석 실습에 적합합니다.</li></ul></article>
-      </div>
-      <div class="table-box"><table><thead><tr><th>구분</th><th>ChatGPT</th><th>Gemini</th></tr></thead><tbody><tr><td>쉽게 말하면</td><td>대화하며 글과 아이디어를 만드는 AI</td><td>자료를 읽고 분석·정리하는 데 유용한 AI</td></tr><tr><td>잘하는 작업</td><td>글쓰기, 문장 수정, 계획 세우기, 아이디어 제안</td><td>문서 요약, 자료 분석, 이미지·파일 분석</td></tr><tr><td>생활 활용</td><td>여행 계획, 자기소개서, 블로그 글, 안내문 작성</td><td>구매 비교표, 이미지 분석, 문서 요약, 자료 정리</td></tr><tr><td>주의할 점</td><td>조건이 부족하면 답변이 일반적으로 나올 수 있음</td><td>자료 내용과 AI 추론 내용을 구분해서 확인해야 함</td></tr></tbody></table></div>
-    </section>
-
-    <section id="structure" class="section dark-section">
-      <div class="section-title light"><p class="number">03</p><h2>프롬프트 기본 구조</h2><p>프롬프트는 AI에게 일을 부탁하는 지시서입니다. 무엇을, 누구를 위해, 어떤 형식으로 만들지 알려줘야 합니다.</p></div>
-      <div class="structure-grid">
-        <article><span>1</span><h3>역할</h3><p>AI가 어떤 입장에서 답변할지 정합니다.</p><em>예: 여행 플래너, 취업 코치, 건강 관리 도우미</em></article>
-        <article><span>2</span><h3>목적</h3><p>무엇을 만들거나 해결해야 하는지 정합니다.</p><em>예: 일정 만들기, 문장 다듬기, 표 정리하기</em></article>
-        <article><span>3</span><h3>대상</h3><p>누구를 위한 결과물인지 정합니다.</p><em>예: 20대 취업 준비생, 60대 스마트폰 초보자</em></article>
-        <article><span>4</span><h3>상황</h3><p>현재 어떤 배경이나 문제가 있는지 설명합니다.</p><em>예: 가족 여행을 준비 중이다</em></article>
-        <article><span>5</span><h3>조건</h3><p>포함할 내용, 제외할 내용, 말투, 분량을 정합니다.</p><em>예: 쉬운 말, 5줄 이내, 표로 작성</em></article>
-        <article><span>6</span><h3>출력 형식</h3><p>결과물을 어떤 형태로 받을지 지정합니다.</p><em>예: 표, 목록, 안내문, 체크리스트</em></article>
-      </div>
-      <div class="formula-box"><p class="formula-title">기본 프롬프트 공식</p><pre><code>너는 [역할]이야.
-나는 [상황] 때문에 [목적]이 필요해.
-대상은 [대상]이야.
-조건은 [조건]이야.
-결과는 [출력 형식]으로 작성해줘.</code></pre></div>
-    </section>
-
-    <section id="practice" class="section">
-      <div class="section-title"><p class="number">04</p><h2>실습 프롬프트</h2><p>20대~60대가 모두 관심을 가질 수 있는 생활밀착형 주제로 직접 입력해봅니다.</p></div>
-      <div class="prompt-list">
-        <article class="prompt-card"><div class="prompt-top"><span>실습 1</span><h3>나쁜 프롬프트와 좋은 프롬프트 비교</h3></div><div class="bad-good"><div><p class="mini-title">나쁜 프롬프트</p><pre><code>가족 여행 일정 짜줘.</code></pre></div><div><p class="mini-title">좋은 프롬프트</p><pre><code>너는 가족 여행 전문 플래너야.
-
-나는 부모님과 함께 1박 2일 국내 여행을 준비하고 있어.
-대상은 40대 자녀와 60대 부모님이 함께하는 가족 여행이야.
-
-조건은 다음과 같아.
-1. 너무 많이 걷지 않는 일정
-2. 식사 시간 포함
-3. 중간에 쉴 수 있는 카페 또는 휴식 장소 포함
-4. 사진 찍기 좋은 장소 포함
-5. 무리한 이동은 제외
-
-결과는 시간대별 일정표로 작성해줘.
-마지막에는 준비물 체크리스트도 함께 작성해줘.</code></pre></div></div></article>
-        <article class="prompt-card"><div class="prompt-top"><span>실습 2</span><h3>20대 관심 주제: 취업 준비</h3></div><pre><code>너는 취업 준비생을 돕는 자기소개서 코치야.
-
-나는 신입 디자이너 또는 사무직 취업을 준비하고 있어.
-
-아래 내용을 바탕으로 자기소개서 문장을 자연스럽게 다듬어줘.
-
-[내가 작성한 문장]
-저는 성실하고 책임감이 강하며 맡은 일을 끝까지 하려고 노력합니다.
-
-조건은 다음과 같아.
-1. 너무 흔한 표현은 줄이기
-2. 실제 경험이 들어갈 수 있도록 문장 방향 제안하기
-3. 신입 지원자에게 어울리는 말투 사용
-4. 과장된 표현은 제외
-5. 수정 문장 3개 제안
-
-결과는 표로 작성해줘.</code></pre></article>
-        <article class="prompt-card"><div class="prompt-top"><span>실습 3</span><h3>30대 관심 주제: 업무 메일 작성</h3></div><pre><code>너는 직장인을 돕는 비즈니스 문서 작성 전문가야.
-
-나는 거래처에 일정 변경 안내 메일을 보내야 해.
-
-상황은 다음과 같아.
-회의 일정이 기존 금요일 오후 2시에서 다음 주 월요일 오전 10시로 변경되었어.
-
-조건은 다음과 같아.
-1. 정중한 말투
-2. 너무 길지 않게 작성
-3. 변경 사유는 간단하게 표현
-4. 상대방에게 확인 요청 포함
-5. 제목도 함께 작성
-
-결과는 이메일 형식으로 작성해줘.</code></pre></article>
-        <article class="prompt-card"><div class="prompt-top"><span>실습 4</span><h3>40대 관심 주제: 생활비 정리</h3></div><pre><code>너는 가계부 정리를 도와주는 생활비 관리 도우미야.
-
-나는 한 달 생활비를 점검하고 싶어.
-항목은 식비, 교통비, 통신비, 쇼핑비, 교육비, 여가비야.
-
-조건은 다음과 같아.
-1. 고정비와 변동비를 구분
-2. 줄일 수 있는 항목 제안
-3. 무리한 절약 방법은 제외
-4. 가족 생활 기준으로 현실적인 조언 제공
-5. 표로 정리
-
-결과는 생활비 점검표와 절약 팁으로 작성해줘.</code></pre></article>
-        <article class="prompt-card"><div class="prompt-top"><span>실습 5</span><h3>50대 관심 주제: 건강 습관 만들기</h3></div><pre><code>너는 생활 습관 개선을 도와주는 건강 관리 코치야.
-
-나는 무리하지 않고 건강 습관을 만들고 싶어.
-대상은 50대 직장인 또는 주부야.
-
-조건은 다음과 같아.
-1. 하루 20분 안에 실천 가능
-2. 어려운 운동은 제외
-3. 식사, 수면, 걷기 습관 포함
-4. 병원 진단처럼 단정하지 않기
-5. 실천 가능한 행동 중심으로 작성
-
-결과는 7일 실천 계획표로 작성해줘.</code></pre></article>
-        <article class="prompt-card"><div class="prompt-top"><span>실습 6</span><h3>60대 관심 주제: 스마트폰 활용</h3></div><pre><code>너는 스마트폰 사용을 쉽게 알려주는 친절한 강사야.
-
-대상은 스마트폰 사용이 익숙하지 않은 60대 학습자야.
-카카오톡으로 사진을 보내는 방법을 설명해줘.
-
-조건은 다음과 같아.
-1. 어려운 용어 사용하지 않기
-2. 단계별로 설명하기
-3. 버튼 이름을 쉽게 표현하기
-4. 실수하기 쉬운 부분도 함께 안내하기
-5. 마지막에 연습 과제 1개 제안
-
-결과는 번호 목록으로 작성해줘.</code></pre></article>
-      </div>
-    </section>
-
-    <section class="section accent-section">
-      <div class="section-title"><p class="number">05</p><h2>ChatGPT와 Gemini 답변 비교 실습</h2><p>같은 프롬프트를 두 도구에 입력하고 결과의 차이를 비교합니다.</p></div>
-      <div class="prompt-card single"><div class="prompt-top"><span>공통 입력 프롬프트</span><h3>전 연령대 AI 활용 사례 추천</h3></div><pre><code>너는 생활 속 AI 활용법을 알려주는 친절한 강사야.
-
-20대부터 60대까지 누구나 사용할 수 있는 AI 활용 사례를 추천해줘.
-
-다음 기준으로 정리해줘.
-1. 연령대
-2. 관심 주제
-3. AI로 할 수 있는 일
-4. 예시 프롬프트
-5. 실습 난이도
-
-조건은 다음과 같아.
-1. 너무 어려운 기술 설명은 제외
-2. 일상생활과 업무에 바로 쓸 수 있는 예시 중심
-3. 각 연령대별로 2개씩 추천
-4. 결과는 표로 작성</code></pre></div>
-      <div class="table-box"><table><thead><tr><th>비교 항목</th><th>ChatGPT 답변</th><th>Gemini 답변</th></tr></thead><tbody><tr><td>이해하기 쉬운가?</td><td></td><td></td></tr><tr><td>예시가 현실적인가?</td><td></td><td></td></tr><tr><td>따라 하기 쉬운가?</td><td></td><td></td></tr><tr><td>표 구성이 보기 좋은가?</td><td></td><td></td></tr><tr><td>다시 사용하고 싶은 답변은?</td><td></td><td></td></tr></tbody></table></div>
-    </section>
-
-    <section id="research-topics" class="section research-topic-section">
-      <div class="section-title">
-        <p class="number">06</p>
-        <h2>딥리서치 PPT 주제 선택</h2>
-        <p>궁금해서 클릭하고 싶어지는 질문형 주제를 고르고, 어두운 프롬프트 박스의 복사 아이콘으로 딥리서치 프롬프트를 바로 사용해보세요.</p>
-      </div>
-      <div class="topic-guide">
-        <div class="topic-guide-box">
-          <h3>주제를 고를 때 확인할 것</h3>
-          <ol>
-            <li>내가 궁금한 주제인가?</li>
-            <li>사람들이 클릭하고 싶어 할 만한 제목인가?</li>
-            <li>자료 조사와 사례 수집이 가능한가?</li>
-            <li>PPT로 만들었을 때 이미지, 표, 그래프, 사례를 넣기 좋은가?</li>
-            <li>발표했을 때 다른 사람들도 흥미롭게 들을 수 있는가?</li>
-          </ol>
-        </div>
-        <div class="topic-guide-box">
-          <h3>실습 방법</h3>
-          <ol>
-            <li>관심 있는 주제 카드를 클릭합니다.</li>
-            <li>아래 프롬프트 박스 내용이 선택한 주제로 바뀝니다.</li>
-            <li>프롬프트 박스 우측 상단 복사 아이콘을 클릭합니다.</li>
-            <li>ChatGPT, Canva, Manus, Gamma, NotebookLM에 입력합니다.</li>
-          </ol>
-        </div>
-      </div>
-      <div class="selected-prompt-box prompt-card single">
-        <div class="prompt-top"><span>딥리서치 복사 프롬프트</span><h3 id="selectedTopicTitle">주제를 선택하면 프롬프트가 바뀝니다</h3></div>
-        <p class="selected-prompt-help">아래 프롬프트 박스 우측 상단의 복사 아이콘을 눌러 사용하세요.</p>
-        <pre id="deepResearchPrompt"><code>딥리서치로 "[선택한 주제]"에 대해 조사해줘.
-
-조사 기준은 다음과 같아.
-
-1. 이 주제가 사람들이 관심을 갖는 이유
-2. 최근 사회적·문화적 배경
-3. 관련 사례
-4. 관련 통계 또는 기사에서 확인할 수 있는 흐름
-5. 20대부터 60대까지 연령대별 반응 차이
-6. PPT로 만들기 좋은 핵심 메시지
-7. 발표 자료 목차 10장
-8. 카드뉴스 제목 5개
-9. 발표할 때 사용할 쉬운 설명 문장
-10. 마지막 결론 정리
-
-결과는 표와 목록을 섞어서 보기 좋게 정리해줘.</code></pre>
-      </div>
-      <div id="topicGrid" class="topic-grid"></div>
-    </section>
-
-    <section id="day-plan" class="section day-plan-section">
-      <div class="section-title"><p class="number">07</p><h2>1일차 · 2일차 수업 흐름 정리</h2><p>기존 수업 내용은 그대로 유지하고, 영상에서 사용된 프롬프트 흐름을 기준으로 ChatGPT와 Gemini에 각각 입력하는 실습 단계를 추가합니다.</p></div>
-      <div class="resource-banner resource-banner-day"><div><p class="resource-label">실습 전 준비</p><h3>예제 이미지는 드라이브에서 확인</h3><p>1일차 이미지 분석 실습 전에 영수증 이미지와 냉장고 사진 예제를 먼저 열어주세요.</p></div><a class="drive-btn" href="https://drive.google.com/drive/folders/16zOd2nfsilMRVi47mbIcpB_9SIvhk3VB?usp=sharing" target="_blank" rel="noopener noreferrer">드라이브 열기</a></div>
-      <div class="day-grid">
-        <article class="day-card day-one"><div class="day-head"><span class="day-badge">1일차</span><h3>ChatGPT와 Gemini에 같은 이미지 입력하고 결과 비교하기</h3><p>영수증 이미지 또는 냉장고 사진을 두 도구에 각각 업로드하고, 같은 프롬프트를 입력하여 분석 결과와 엑셀 파일 생성 가능 여부를 비교합니다.</p></div><div class="step-list"><div class="step-item"><span>01</span><div><h4>같은 이미지 준비</h4><p>영수증 이미지, 냉장고 사진 등 수강생이 이해하기 쉬운 생활밀착형 이미지를 준비합니다.</p></div></div><div class="step-item"><span>02</span><div><h4>ChatGPT에 이미지 입력</h4><pre><code>첨부된 이미지를 분석해서 엑셀 파일로 만들어 줘.</code></pre></div></div><div class="step-item"><span>03</span><div><h4>Gemini에 같은 이미지 입력</h4><pre><code>첨부된 이미지를 분석해서 엑셀 파일로 만들어 줘.</code></pre></div></div><div class="step-item"><span>04</span><div><h4>열 구분을 지정해서 다시 요청</h4><pre><code>첨부된 이미지 분석
-
-열구분
-날짜, 가격, 제품 이름</code></pre></div></div><div class="step-item"><span>05</span><div><h4>다운로드 가능한 엑셀 파일 요청</h4><pre><code>다운로드 받을 수 있는 .xlsx로 제공해 줘.</code></pre><pre><code>다운로드 가능한 파일로 다시 제공해 줘.</code></pre></div></div></div><div class="mini-table"><h4>1일차 비교 기준</h4><table><thead><tr><th>비교 항목</th><th>ChatGPT</th><th>Gemini</th></tr></thead><tbody><tr><td>이미지 내용을 잘 읽었는가?</td><td></td><td></td></tr><tr><td>날짜, 가격, 제품명이 정확한가?</td><td></td><td></td></tr><tr><td>표 구성이 깔끔한가?</td><td></td><td></td></tr><tr><td>엑셀 파일 요청에 잘 반응하는가?</td><td></td><td></td></tr><tr><td>수정 요청을 잘 반영하는가?</td><td></td><td></td></tr></tbody></table></div></article>
-        <article class="day-card day-two"><div class="day-head"><span class="day-badge">2일차</span><h3>Gemini로 프로젝트 지침 만들고 ChatGPT 프로젝트에서 테스트하기</h3><p>반복 작업을 매번 새로 입력하지 않도록 Gemini에게 ChatGPT 프로젝트용 지침을 만들게 하고, ChatGPT 프로젝트에 넣어 테스트합니다.</p></div><div class="step-list"><div class="step-item"><span>01</span><div><h4>Gemini에 프로젝트 지침 생성 요청</h4><pre><code># 역할
-AI 프롬프트 엔지니어
-
-# 대상
-ChatGPT
-
-# 목적
-첨부된 파일을 분석해서 엑셀 파일로 출력하는 프로젝트 제작용 지침 생성
-
-# 제약
-ChatGPT 프롬프트 작성
-결과물을 만드는 것이 아닌 프로젝트에 입력할 지침을 작성하시오.
-
-# 형식
-포카츠 프롬프트 양식 사용
-지침을 활용한 결과물은 테이블 형식으로 작성하고 다운로드 가능한 엑셀 파일로 제공받을 거예요.
-
-# 명령문
--
-
-# 제약 조건
--
-
-# 입력문
--
-
-# 출력
--</code></pre></div></div><div class="step-item"><span>02</span><div><h4>형식이 흐트러질 때 보조 문장 추가</h4><pre><code>아래 예시로 작성한 형식을 지켜.</code></pre></div></div><div class="step-item"><span>03</span><div><h4>Gemini가 만든 지침을 ChatGPT 프로젝트에 입력</h4><p>Gemini가 작성한 프로젝트 지침을 복사한 뒤, ChatGPT 프로젝트 지침 영역에 붙여넣고 저장합니다.</p></div></div><div class="step-item"><span>04</span><div><h4>ChatGPT 프로젝트에서 이미지 분석 테스트</h4><pre><code>첨부된 이미지 분석
-
-열구분
-날짜, 가격, 제품 이름</code></pre></div></div><div class="step-item"><span>05</span><div><h4>시트 추가와 함수 추가 요청</h4><pre><code>입력문
-시트 추가
-[시트명은 기타]라는 이름의 시트를 추가해 줘.</code></pre><pre><code>데이터 추가
-[셀 주소]에 평균 구하는 함수를 추가해서 총 가격의 평균을 입력해 줘.</code></pre><pre><code>[셀 주소]에 AVERAGE 함수를 추가해서 총 가격의 평균을 입력해 줘.</code></pre><pre><code>여기에 최댓값 구하는 함수 넣어서 가격의 최댓값 구해 줘.</code></pre></div></div></div><div class="extension-box"><h4>2일차 확장 실습 주제</h4><ul><li>냉장고 사진 분석 프로젝트: 재료, 종류, 활용으로 정리</li><li>블로그 글 작성 프로젝트 지침 만들기</li><li>회사 단톡방 공지글 작성 프로젝트 지침 만들기</li><li>초급 골퍼 실력 향상 안내 프로젝트 지침 만들기</li><li>골프 모임 계획 프로젝트 지침 만들기</li><li>근무자 평가표 작성 프롬프트 추천받기</li></ul><pre><code>이미지 분석 후
-
-열구분
-재료, 종류, 활용</code></pre></div></article>
-      </div>
-    </section>
-
-    <section id="wrapup" class="section wrapup">
-      <div class="section-title light"><p class="number">08</p><h2>오늘의 핵심 정리</h2><p>좋은 답변은 좋은 프롬프트에서 시작됩니다.</p></div>
-      <div class="summary-grid"><div><h3>오늘 기억할 6가지</h3><ol><li>AI에게 역할을 정해줍니다.</li><li>내가 원하는 목적을 정확히 말합니다.</li><li>대상과 상황을 설명합니다.</li><li>조건을 구체적으로 작성합니다.</li><li>결과 형식을 미리 정합니다.</li><li>첫 답변이 부족하면 다시 수정 요청합니다.</li></ol></div><div class="next-box"><p class="next-label">다음 수업</p><h3>나만의 AI 비서 만들기</h3><p>오늘 배운 프롬프트 작성법을 바탕으로, 반복적으로 사용할 수 있는 맞춤형 챗봇 또는 AI 비서 제작 실습을 진행합니다.</p></div></div>
-    </section>
-  </main>
-
-  <footer><p>AI Prompt Engineering Class · ChatGPT & Gemini Basic Practice</p></footer>
+  </div>
 
   <script>
-    const copyIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="10" height="10" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
-    const topics = [
-      {cat:'소비·브랜드', type:'brand', title:'사람들은 왜 충동구매를 할까?', desc:'소비 심리, 마케팅 자극, 할인 문구, 감정 소비를 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'다이소가 계속 인기 있는 이유', desc:'가성비, 생활용품 시장, 저가 소비, 세대별 구매 습관을 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'탕후루 유행은 왜 빠르게 식었을까?', desc:'유행 소비, SNS 확산, 식품 트렌드의 생명주기를 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'무인매장은 정말 편리할까?', desc:'무인 서비스, 소비자 편의성, 불편 요소, 세대별 사용 차이를 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'키오스크는 누구에게 불편할까?', desc:'디지털 소외, 사용자 경험, 연령대별 접근성 문제를 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'사람들은 왜 리뷰를 믿고 구매할까?', desc:'리뷰 신뢰도, 온라인 구매 심리, 별점 문화, 소비 결정 과정을 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'별점 5점보다 4.7점이 더 믿음직한 이유', desc:'완벽한 평점보다 현실적인 평가를 신뢰하는 심리를 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'왜 사람들은 한정판에 열광할까?', desc:'희소성 마케팅, 소장 욕구, 브랜드 전략을 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'편의점 신상품은 왜 계속 궁금할까?', desc:'신제품 마케팅, SNS 후기, 편의점 소비 문화를 조사하기 좋은 주제입니다.'},
-      {cat:'소비·브랜드', type:'brand', title:'구독 서비스는 정말 이득일까?', desc:'구독 경제, 고정비 증가, 편리함과 비용 문제를 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'왜 우리는 유튜브 쇼츠를 멈추지 못할까?', desc:'짧은 영상 소비, 집중력, 알고리즘, 중독성을 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'배달앱을 끊기 어려운 이유', desc:'편의성, 할인 쿠폰, 음식 소비 습관, 플랫폼 의존도를 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'왜 사람들은 새벽배송을 좋아할까?', desc:'빠른 배송, 시간 절약, 생활 패턴 변화, 온라인 장보기를 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'스마트폰은 집중력을 얼마나 떨어뜨릴까?', desc:'알림, 멀티태스킹, 집중력 저하, 디지털 습관을 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'디지털 디톡스는 정말 효과가 있을까?', desc:'스마트폰 사용 줄이기, 휴식, 집중력 회복, 생활 변화를 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'사람들은 왜 사진을 찍고 공유할까?', desc:'SNS 문화, 자기표현, 기록 욕구, 관계 형성을 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'인스타 감성은 왜 계속 바뀔까?', desc:'시각 트렌드, SNS 미감, 유행 변화, 콘텐츠 소비를 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'AI가 만든 콘텐츠를 사람들은 어떻게 볼까?', desc:'AI 창작물, 신뢰도, 저작권 인식, 사람들의 반응을 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'앞으로 사람들은 AI를 어디까지 믿게 될까?', desc:'AI 신뢰, 정보 검증, 윤리 문제, 일상 속 AI 활용을 조사하기 좋은 주제입니다.'},
-      {cat:'디지털·AI·미디어', type:'digital', title:'AI가 만든 발표 자료는 사람이 만든 것과 다를까?', desc:'AI PPT, 디자인 완성도, 자료 구성, 창의성 차이를 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'요즘 사람들은 왜 건강기능식품을 챙길까?', desc:'건강 관심 증가, 자기관리, 광고, 세대별 건강 소비를 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'물을 많이 마시면 정말 건강해질까?', desc:'수분 섭취, 건강 정보, 생활 습관, 잘못 알려진 상식을 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'아침밥을 꼭 먹어야 할까?', desc:'식습관, 에너지 관리, 연령대별 생활 패턴을 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'사람들은 왜 다이어트를 반복할까?', desc:'다이어트 심리, 실패 원인, 식습관, 자기관리 문화를 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'수면 부족은 생활을 얼마나 바꿀까?', desc:'수면 시간, 피로, 집중력, 일상 생산성을 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'걷기 운동은 정말 효과가 있을까?', desc:'걷기 습관, 건강 효과, 접근성 높은 운동 방법을 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'스트레스 받을 때 단 음식이 당기는 이유', desc:'감정과 식욕, 스트레스 반응, 생활 습관을 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'왜 우리는 쉬어도 피곤할까?', desc:'번아웃, 수면의 질, 생활 리듬, 회복 방법을 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'미라클 모닝은 정말 삶을 바꿀까?', desc:'아침 루틴, 자기계발, 시간 관리, 실천 효과를 조사하기 좋은 주제입니다.'},
-      {cat:'건강·생활습관', type:'health', title:'퇴근 후 시간을 잘 쓰는 사람들의 특징', desc:'워라밸, 자기관리, 취미, 루틴 형성을 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'사람들은 왜 MBTI를 좋아할까?', desc:'자기이해, 관계 형성, 심리 테스트 문화, 세대별 소통 방식을 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'혈액형 성격설은 왜 아직도 회자될까?', desc:'유사과학, 대화 소재, 성격 분류 문화, 믿음의 이유를 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'첫인상은 정말 중요할까?', desc:'관계 형성, 외모와 태도, 커뮤니케이션 심리를 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'사람들은 왜 미신을 믿을까?', desc:'불안 심리, 통제 욕구, 문화적 믿음, 생활 속 미신을 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'운세 콘텐츠는 왜 꾸준히 인기 있을까?', desc:'재미, 불안 해소, 자기 해석, 콘텐츠 소비 심리를 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'사소한 말 한마디가 기분을 바꾸는 이유', desc:'언어와 감정, 관계 심리, 커뮤니케이션 영향을 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'사람들은 왜 비교를 멈추지 못할까?', desc:'SNS 비교, 자존감, 경쟁 사회, 심리적 압박을 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'요즘 세대는 왜 ‘갓생’을 말할까?', desc:'자기관리 문화, 생산성, 인증 문화, 세대별 가치관을 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'사람들은 왜 정리정돈 영상을 좋아할까?', desc:'대리만족, 안정감, 공간 정리, 영상 콘텐츠 소비를 조사하기 좋은 주제입니다.'},
-      {cat:'심리·관계·문화', type:'culture', title:'귀여운 것은 왜 사람의 마음을 움직일까?', desc:'귀여움의 심리, 캐릭터, 감정 반응, 소비 행동을 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'맛집은 어떻게 유명해질까?', desc:'리뷰, SNS 확산, 입소문, 지역 상권을 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'웨이팅 맛집은 왜 더 가고 싶을까?', desc:'기대감, 희소성, 사회적 증거, 맛집 소비 심리를 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'사람들은 왜 여행지보다 숙소를 먼저 고를까?', desc:'숙박 경험, 휴식 가치, 여행 소비 기준 변화를 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'혼자 여행하는 사람이 늘어나는 이유', desc:'개인화, 자유로운 일정, 자기만의 시간, 여행 트렌드를 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'가족 여행에서 가장 많이 싸우는 이유', desc:'세대 차이, 일정 갈등, 비용 문제, 가족 소통을 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'집꾸미기는 왜 계속 인기 있을까?', desc:'공간 취향, 라이프스타일, 셀프 인테리어, SNS 영향을 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'반려동물 시장은 왜 커지고 있을까?', desc:'1인 가구, 가족 개념 변화, 펫코노미, 소비 시장을 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'캐릭터 굿즈는 왜 사고 싶어질까?', desc:'팬덤, 소장 욕구, 감정 소비, 브랜드 캐릭터 전략을 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'레트로 감성은 왜 다시 유행할까?', desc:'향수, 세대 문화, 디자인 트렌드, 복고 마케팅을 조사하기 좋은 주제입니다.'},
-      {cat:'여행·취미·라이프스타일', type:'life', title:'커피 한 잔 가격은 어디까지 올라갈까?', desc:'커피 소비, 원가, 브랜드 가격, 카페 문화 변화를 조사하기 좋은 주제입니다.'}
-    ];
+    (async function(){
+      const originalUrl = 'https://raw.githubusercontent.com/khjsbs324/AI_PA_26_1/bdf6215a0cc32f12b7b86f1651b090c8aac4148f/index.html';
+      const parser = new DOMParser();
 
-    function makePrompt(topic){
-      return `딥리서치로 "${topic}"에 대해 조사해줘.\n\n조사 기준은 다음과 같아.\n\n1. 이 주제가 사람들이 관심을 갖는 이유\n2. 최근 사회적·문화적 배경\n3. 관련 사례\n4. 관련 통계 또는 기사에서 확인할 수 있는 흐름\n5. 20대부터 60대까지 연령대별 반응 차이\n6. PPT로 만들기 좋은 핵심 메시지\n7. 발표 자료 목차 10장\n8. 카드뉴스 제목 5개\n9. 발표할 때 사용할 쉬운 설명 문장\n10. 마지막 결론 정리\n\n결과는 표와 목록을 섞어서 보기 좋게 정리해줘.`;
-    }
+      try{
+        const [originalHtml, promptHtml] = await Promise.all([
+          fetch(originalUrl).then(response => {
+            if(!response.ok) throw new Error('원본 페이지를 불러오지 못했습니다.');
+            return response.text();
+          }),
+          fetch('./brand-prompts.html').then(response => {
+            if(!response.ok) throw new Error('브랜드 프롬프트 페이지를 불러오지 못했습니다.');
+            return response.text();
+          })
+        ]);
 
-    function renderTopics(){
-      const grid = document.getElementById('topicGrid');
-      if(!grid) return;
-      grid.innerHTML = topics.map((item, index) => `
-        <article class="topic-card" data-topic="${item.title}">
-          <span class="topic-tag ${item.type}">${item.cat}</span>
-          <h3>${index + 1}. ${item.title}</h3>
-          <p>${item.desc}</p>
-        </article>
-      `).join('');
-    }
+        const originalDoc = parser.parseFromString(originalHtml, 'text/html');
+        const promptDoc = parser.parseFromString(promptHtml, 'text/html');
+        const promptWrap = promptDoc.querySelector('.prompt-wrap');
 
-    function selectTopic(topic, card){
-      const promptBox = document.querySelector('#deepResearchPrompt code');
-      const title = document.getElementById('selectedTopicTitle');
-      if(promptBox) promptBox.textContent = makePrompt(topic);
-      if(title) title.textContent = topic;
-      document.querySelectorAll('.topic-card').forEach(item => item.classList.remove('selected'));
-      if(card) card.classList.add('selected');
-    }
+        const extraStyle = originalDoc.createElement('style');
+        extraStyle.textContent = `
+          .brand-prompt-section{background:linear-gradient(180deg,#f8fbff 0%,#ffffff 100%)}
+          .brand-prompt-section .prompt-wrap{display:grid;gap:22px}
+          .brand-prompt-section .prompt-block{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}
+          .brand-prompt-section .prompt-block h2{margin:0 0 14px;font-size:22px;letter-spacing:-.03em;color:var(--ink)}
+          .brand-prompt-section .prompt-block pre{margin:0;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.7;overflow:auto}
+        `;
+        originalDoc.head.appendChild(extraStyle);
 
-    function setupCodeCopyButtons(){
-      document.querySelectorAll('pre').forEach((pre) => {
-        if(pre.parentElement && pre.parentElement.classList.contains('copyable-code')) return;
-        const wrapper = document.createElement('div');
-        wrapper.className = 'copyable-code';
-        pre.parentNode.insertBefore(wrapper, pre);
-        wrapper.appendChild(pre);
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'code-copy-btn';
-        button.setAttribute('aria-label','프롬프트 복사');
-        button.innerHTML = copyIcon;
-        button.addEventListener('click', async () => {
-          const text = pre.innerText.trim();
-          try{
-            await navigator.clipboard.writeText(text);
-            button.classList.add('copied');
-            button.textContent = '✓';
-            setTimeout(() => {
-              button.classList.remove('copied');
-              button.innerHTML = copyIcon;
-            }, 1400);
-          }catch(error){
-            alert('복사에 실패했습니다. 브라우저 권한을 확인해주세요.');
-          }
-        });
-        wrapper.appendChild(button);
-      });
-    }
+        const nav = originalDoc.querySelector('.nav');
+        const wrapupNav = nav ? nav.querySelector('a[href="#wrapup"]') : null;
+        if(nav && !nav.querySelector('a[href="#brand-prompts"]')){
+          const link = originalDoc.createElement('a');
+          link.href = '#brand-prompts';
+          link.textContent = '브랜드기획';
+          nav.insertBefore(link, wrapupNav || null);
+        }
 
-    document.addEventListener('click', (event) => {
-      const card = event.target.closest('.topic-card');
-      if(!card) return;
-      selectTopic(card.dataset.topic, card);
-    });
+        const section = originalDoc.createElement('section');
+        section.id = 'brand-prompts';
+        section.className = 'section brand-prompt-section';
+        section.innerHTML = `
+          <div class="section-title">
+            <p class="number">08</p>
+            <h2>브랜드 기획 실습 프롬프트</h2>
+            <p>강사 제공 보고서를 기준으로 브랜드 후보 도출, 평가, 최종 선택, 사업계획서, 디자이너 전달용 제안서까지 단계별로 작성합니다.</p>
+          </div>
+        `;
 
-    renderTopics();
-    setupCodeCopyButtons();
+        if(promptWrap){
+          section.appendChild(originalDoc.importNode(promptWrap, true));
+        }
+
+        const wrapup = originalDoc.querySelector('#wrapup');
+        if(wrapup && wrapup.parentNode){
+          wrapup.parentNode.insertBefore(section, wrapup);
+          const wrapupNumber = wrapup.querySelector('.number');
+          if(wrapupNumber) wrapupNumber.textContent = '09';
+        }else{
+          originalDoc.querySelector('main').appendChild(section);
+        }
+
+        document.open();
+        document.write('<!DOCTYPE html>' + originalDoc.documentElement.outerHTML);
+        document.close();
+      }catch(error){
+        document.body.innerHTML = `<div class="loading"><div class="loading-box"><h1>페이지 추가 중 오류가 발생했습니다</h1><p>${error.message}</p></div></div>`;
+      }
+    })();
   </script>
 </body>
 </html>
