@@ -16,7 +16,7 @@
   <div class="loading">
     <div class="loading-box">
       <h1>수업페이지를 불러오는 중입니다</h1>
-      <p>기존 수업페이지 내용을 유지하고 브랜드 기획 실습 프롬프트 섹션을 추가합니다.</p>
+      <p>기존 수업페이지 내용을 유지하고 프롬프트 섹션을 추가합니다.</p>
     </div>
   </div>
 
@@ -24,6 +24,146 @@
     (async function(){
       const originalUrl = 'https://raw.githubusercontent.com/khjsbs324/AI_PA_26_1/bdf6215a0cc32f12b7b86f1651b090c8aac4148f/index.html';
       const parser = new DOMParser();
+      const shotPromptText = `SHOT ID:
+[프로젝트명_시퀀스_샷번호_버전]
+
+영상 목적:
+[제품 소개 / 공간 공개 / 인물 감정 / 행동 전달 / 전환 샷 등]
+
+영상 길이:
+[초 단위]
+
+프레임 비율:
+[16:9 / 9:16 / 1:1 / 4:5]
+
+피사체 고정 정보:
+[피사체 수량]
+[외형]
+[의상]
+[색상]
+[재질]
+[형태]
+[변경되면 안 되는 특징]
+
+장소와 시간:
+[장소]
+[실내 또는 실외]
+[시간대]
+[날씨]
+[배경 구조]
+[주요 소품]
+
+피사체의 시작 위치:
+[화면 속 위치]
+[실제 공간 속 위치]
+[카메라와의 거리]
+[바라보는 방향]
+
+피사체 행동:
+[하나의 핵심 행동]
+[행동 방향]
+[행동 속도]
+[행동 시작과 정지 시점]
+[표정 또는 상태 변화]
+
+피사체의 종료 위치:
+[화면 속 최종 위치]
+[실제 공간 속 최종 위치]
+[최종 자세와 시선 방향]
+
+시작 숏과 구도:
+[숏 크기]
+[피사체 크기]
+[피사체 배치]
+[여백]
+[전경·중경·배경 관계]
+
+카메라 앵글:
+[아이레벨 / 하이앵글 / 로우앵글 / 탑뷰 등]
+[정면 / 측면 / 후면 / 3/4 시점]
+[카메라 높이]
+
+렌즈와 원근감:
+[초광각 / 광각 / 표준 / 망원 / 매크로]
+[공간감]
+[배경 압축]
+[원근 왜곡]
+
+렌즈와 피사계 심도:
+[얕은 / 중간 / 깊은 심도]
+[초점 대상]
+[초점 이동 여부]
+[배경 흐림 정도]
+
+카메라 지지 및 이동 장비 느낌:
+[삼각대 / 핸드헬드 / 짐벌 / 달리 / 슬라이더 / 크레인 / 드론 등]
+[실제 화면에 나타날 안정성 또는 흔들림]
+
+카메라 이동 방식:
+[고정 / 팬 / 틸트 / 돌리 인 / 돌리 아웃 / 트래킹 / 아크 / 크레인 / 드론]
+
+이동 방향:
+[앞으로 / 뒤로 / 좌에서 우 / 우에서 좌 / 상승 / 하강 / 회전]
+[피사체를 기준으로 한 이동 경로]
+
+이동 속도:
+[매우 느리게 / 느리게 / 보통 / 빠르게]
+[일정한 속도 / 가속 / 감속]
+[시작과 종료 시 부드러운 정지 여부]
+
+종료 숏과 구도:
+[최종 숏 크기]
+[최종 피사체 배치]
+[초점 위치]
+[다음 장면 연결을 위한 상태]
+
+조명 방향과 색온도:
+[광원 위치]
+[소프트 / 하드]
+[색온도]
+[그림자 방향]
+[영상 중 조명 변화 여부]
+
+전체 색감:
+[웜 / 쿨 / 뉴트럴]
+[채도]
+[명도]
+[상업적 / 영화적 / 다큐멘터리적]
+
+특수촬영 효과:
+[없음 / 슬로모션 / 타임랩스 / 고속촬영 / 수중 / 매크로 / 드론 / 포커스 풀]
+[효과가 적용되는 구간]
+[효과의 강도]
+
+연속성 유지 조건:
+[피사체 수량]
+[외형]
+[의상]
+[제품 형태]
+[배경 구조]
+[조명 방향]
+[이동 방향]
+[카메라 축]
+[소품 위치]
+[색감]
+[시간대]
+
+다음 장면 연결 조건:
+[다음 샷의 내용]
+[현재 샷이 끝날 때 피사체의 위치와 방향]
+[다음 샷과 동일하게 유지해야 할 카메라 축]
+[조명과 색감]
+[행동 연결점]
+
+제외 조건:
+[추가 피사체 생성 금지]
+[피사체 외형 변화 금지]
+[갑작스러운 카메라 회전 금지]
+[자동 줌 금지]
+[배경 변형 금지]
+[조명 깜빡임 금지]
+[프레임 왜곡 금지]
+[장면 전환 또는 자동 컷 금지]`;
 
       try{
         const [originalHtml, promptHtml] = await Promise.all([
@@ -47,6 +187,7 @@
           .brand-prompt-section .prompt-wrap{display:grid;gap:22px}
           .brand-prompt-section .prompt-block{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}
           .brand-prompt-section .prompt-block h2{margin:0 0 14px;font-size:22px;letter-spacing:-.03em;color:var(--ink)}
+          .brand-prompt-section .method{margin:0 0 14px;color:#2457ff;font-weight:900}
           .brand-prompt-section .prompt-block pre{margin:0;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.7;overflow:auto}
         `;
         originalDoc.head.appendChild(extraStyle);
@@ -56,7 +197,7 @@
         if(nav && !nav.querySelector('a[href="#brand-prompts"]')){
           const link = originalDoc.createElement('a');
           link.href = '#brand-prompts';
-          link.textContent = '브랜드기획';
+          link.textContent = '프롬프트실습';
           nav.insertBefore(link, wrapupNav || null);
         }
 
@@ -66,14 +207,34 @@
         section.innerHTML = `
           <div class="section-title">
             <p class="number">08</p>
-            <h2>브랜드 기획 실습 프롬프트</h2>
-            <p>강사 제공 보고서를 기준으로 브랜드 후보 도출, 평가, 최종 선택, 사업계획서, 디자이너 전달용 제안서까지 단계별로 작성합니다.</p>
+            <h2>브랜드·영상 제작 실습 프롬프트</h2>
+            <p>브랜드 제작 흐름과 영상 샷 설계에 사용할 수 있는 실습용 프롬프트를 단계별로 정리합니다.</p>
           </div>
         `;
 
-        if(promptWrap){
-          section.appendChild(originalDoc.importNode(promptWrap, true));
-        }
+        const importedPromptWrap = promptWrap ? originalDoc.importNode(promptWrap, true) : originalDoc.createElement('section');
+        importedPromptWrap.className = 'prompt-wrap';
+
+        const shotArticle = originalDoc.createElement('article');
+        shotArticle.className = 'prompt-block';
+
+        const shotTitle = originalDoc.createElement('h2');
+        shotTitle.textContent = '10. 영상 샷 설계 프롬프트';
+
+        const shotMethod = originalDoc.createElement('p');
+        shotMethod.className = 'method';
+        shotMethod.textContent = '활용 기법: 샷 디렉션 프롬프트 + 연속성 제어 + 제외 조건 명시';
+
+        const shotPre = originalDoc.createElement('pre');
+        const shotCode = originalDoc.createElement('code');
+        shotCode.textContent = shotPromptText;
+        shotPre.appendChild(shotCode);
+
+        shotArticle.appendChild(shotTitle);
+        shotArticle.appendChild(shotMethod);
+        shotArticle.appendChild(shotPre);
+        importedPromptWrap.appendChild(shotArticle);
+        section.appendChild(importedPromptWrap);
 
         const wrapup = originalDoc.querySelector('#wrapup');
         if(wrapup && wrapup.parentNode){
