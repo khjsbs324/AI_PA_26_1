@@ -253,12 +253,12 @@
           .brand-prompt-section .method{margin:0 0 14px;color:#2457ff;font-weight:900}
           .brand-prompt-section .prompt-block pre{margin:0;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.7;overflow:auto}
           .personality-section{background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%)}
-          .personality-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-          .personality-question{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;align-items:start;min-height:112px;padding:22px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 24px rgba(23,24,33,.045)}
-          .personality-question .question-number{display:inline-flex;width:46px;height:46px;align-items:center;justify-content:center;border-radius:14px;background:var(--soft-blue);color:var(--blue);font-weight:900;font-variant-numeric:tabular-nums}
-          .personality-question p{margin:5px 0 0;color:var(--text);font-size:17px;line-height:1.65}
-          @media(max-width:820px){.personality-grid{grid-template-columns:1fr}.personality-question{min-height:0}}
-          @media(max-width:640px){.personality-question{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:18px}.personality-question .question-number{width:40px;height:40px;border-radius:12px}.personality-question p{margin-top:2px;font-size:16px}}
+          .personality-grid{display:grid;gap:22px}
+          .personality-question{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}
+          .personality-question h3{margin:0 0 14px;color:var(--ink);font-size:22px;line-height:1.4;letter-spacing:-.03em}
+          .personality-question pre{margin:0;min-height:72px;display:flex;align-items:center;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.7;overflow:auto}
+          .personality-question code{display:block;padding-right:38px;font-size:16px}
+          @media(max-width:640px){.personality-question{padding:18px}.personality-question h3{font-size:19px}.personality-question pre{min-height:64px;padding:18px}.personality-question code{font-size:14px}}
         `;
         originalDoc.head.appendChild(extraStyle);
 
@@ -325,8 +325,8 @@
           <div class="personality-grid">
             ${personalityQuestions.map((question, index) => `
               <article class="personality-question">
-                <span class="question-number">${String(index + 1).padStart(2, '0')}</span>
-                <p>${question}</p>
+                <h3>${index + 1}. 성향 탐색 문항</h3>
+                <pre><code>${question}</code></pre>
               </article>
             `).join('')}
           </div>
