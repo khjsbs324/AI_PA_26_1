@@ -253,12 +253,11 @@
           .brand-prompt-section .method{margin:0 0 14px;color:#2457ff;font-weight:900}
           .brand-prompt-section .prompt-block pre{margin:0;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.7;overflow:auto}
           .personality-section{background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%)}
-          .personality-grid{display:grid;gap:22px}
-          .personality-question{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}
-          .personality-question h3{margin:0 0 14px;color:var(--ink);font-size:22px;line-height:1.4;letter-spacing:-.03em}
-          .personality-question pre{margin:0;min-height:72px;display:flex;align-items:center;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.7;overflow:auto}
-          .personality-question code{display:block;padding-right:38px;font-size:16px}
-          @media(max-width:640px){.personality-question{padding:18px}.personality-question h3{font-size:19px}.personality-question pre{min-height:64px;padding:18px}.personality-question code{font-size:14px}}
+          .personality-copy-block{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}
+          .personality-copy-block h3{margin:0 0 14px;color:var(--ink);font-size:22px;line-height:1.4;letter-spacing:-.03em}
+          .personality-copy-block pre{margin:0;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.8;overflow:auto}
+          .personality-copy-block code{display:block;padding-right:38px;font-size:15px}
+          @media(max-width:640px){.personality-copy-block{padding:18px}.personality-copy-block h3{font-size:19px}.personality-copy-block pre{padding:18px}.personality-copy-block code{font-size:13px}}
         `;
         originalDoc.head.appendChild(extraStyle);
 
@@ -322,14 +321,10 @@
             <h2 id="personality-title">성향 탐색 문항 60개</h2>
             <p>각 문항을 순서대로 읽으며 자신의 평소 생각과 행동에 얼마나 가까운지 확인합니다.</p>
           </div>
-          <div class="personality-grid">
-            ${personalityQuestions.map((question, index) => `
-              <article class="personality-question">
-                <h3>${index + 1}. 성향 탐색 문항</h3>
-                <pre><code>${question}</code></pre>
-              </article>
-            `).join('')}
-          </div>
+          <article class="personality-copy-block">
+            <h3>성향 탐색 문항 전체</h3>
+            <pre><code>${personalityQuestions.map((question, index) => `${index + 1}. ${question}`).join('\n')}</code></pre>
+          </article>
         `;
 
         const wrapup = originalDoc.querySelector('#wrapup');
