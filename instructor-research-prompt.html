@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>강사 기준 프롬프트 · AI 최신 정보 반복 작업</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --surface:#ffffff;
+      --surface-soft:#f8faff;
+      --ink:#172033;
+      --muted:#667085;
+      --line:#dfe5ef;
+      --primary:#3458eb;
+      --primary-soft:#eaf0ff;
+      --danger:#b42318;
+      --danger-soft:#fff0ee;
+      --shadow:0 14px 38px rgba(28,39,76,.08);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,"Noto Sans KR",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.75;
+      word-break:keep-all;
+    }
+
+    a{color:inherit}
+    .page{max-width:1080px;margin:0 auto;padding:52px 24px 80px}
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:24px;
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:800;
+    }
+
+    .hero{
+      padding:36px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(135deg,#ffffff 0%,#eef3ff 100%);
+      box-shadow:var(--shadow);
+    }
+    .eyebrow{
+      display:inline-flex;
+      margin:0 0 12px;
+      padding:6px 12px;
+      border-radius:999px;
+      color:var(--primary);
+      background:var(--primary-soft);
+      font-size:14px;
+      font-weight:900;
+    }
+    h1{margin:0;font-size:clamp(32px,5vw,52px);line-height:1.2;letter-spacing:-.055em}
+    .hero p{margin:14px 0 0;color:var(--muted);font-size:17px}
+
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:24px;
+    }
+    .flow-item{
+      padding:18px;
+      border:1px solid rgba(52,88,235,.18);
+      border-radius:18px;
+      background:rgba(255,255,255,.8);
+    }
+    .flow-item strong{display:block;color:var(--primary);font-size:18px}
+    .flow-item span{color:var(--muted);font-size:14px}
+
+    .section{margin-top:28px;padding:30px;border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:var(--shadow)}
+    .section-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px}
+    .number{
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      color:#fff;
+      background:var(--primary);
+      font-weight:900;
+    }
+    h2{margin:0;font-size:27px;line-height:1.35;letter-spacing:-.04em}
+    .section-head p{margin:5px 0 0;color:var(--muted)}
+
+    .summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .summary-card{padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--surface-soft)}
+    .summary-card h3{margin:0 0 10px;font-size:18px;color:var(--primary)}
+    .summary-card p{margin:4px 0;color:var(--ink)}
+
+    .group{padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--surface-soft)}
+    .group + .group{margin-top:14px}
+    .group h3{margin:0 0 12px;font-size:20px;letter-spacing:-.025em}
+    .group ol,.group ul{margin:0;padding-left:22px}
+    .group li+li{margin-top:7px}
+
+    .rank-list{list-style:none;padding:0!important}
+    .rank-list li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line)}
+    .rank-list li:last-child{border-bottom:0}
+    .rank{
+      flex:0 0 auto;
+      min-width:48px;
+      padding:3px 8px;
+      border-radius:999px;
+      background:var(--primary-soft);
+      color:var(--primary);
+      font-size:13px;
+      font-weight:900;
+      text-align:center;
+    }
+
+    .conditions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .condition-card{padding:20px;border:1px solid var(--line);border-radius:18px;background:#fff}
+    .condition-card h3{margin:0 0 10px;font-size:18px;color:var(--primary)}
+    .condition-card ul{margin:0;padding-left:20px}
+    .condition-card li+li{margin-top:6px}
+
+    .checklist{counter-reset:item;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin:0;padding:0;list-style:none}
+    .checklist li{
+      position:relative;
+      min-height:54px;
+      padding:14px 14px 14px 46px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:#fff;
+    }
+    .checklist li::before{
+      counter-increment:item;
+      content:counter(item);
+      position:absolute;
+      left:13px;
+      top:13px;
+      display:grid;
+      place-items:center;
+      width:24px;
+      height:24px;
+      border-radius:8px;
+      color:var(--primary);
+      background:var(--primary-soft);
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .failure{
+      margin-top:18px;
+      padding:22px;
+      border:1px solid #f4b4ae;
+      border-radius:20px;
+      background:var(--danger-soft);
+    }
+    .failure h3{margin:0 0 10px;color:var(--danger);font-size:19px}
+    .failure ol{margin:0;padding-left:22px}
+    .failure li+li{margin-top:6px}
+
+    @media(max-width:760px){
+      .page{padding:28px 16px 60px}
+      .hero,.section{padding:22px}
+      .flow,.summary-grid,.conditions,.checklist{grid-template-columns:1fr}
+      h2{font-size:23px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="back-link" href="./index.html">← 수업페이지로 돌아가기</a>
+
+    <header class="hero">
+      <p class="eyebrow">강사 기준 프롬프트</p>
+      <h1>AI 최신 정보 반복 작업 설계</h1>
+      <p>핵심 키워드를 조사하고, 분석 기준을 정한 뒤, 반복 작업에 필요한 조건을 최종 구축합니다.</p>
+
+      <div class="flow" aria-label="수업 진행 구조">
+        <div class="flow-item"><strong>조사</strong><span>핵심 키워드</span></div>
+        <div class="flow-item"><strong>분석</strong><span>판단 기준</span></div>
+        <div class="flow-item"><strong>구축</strong><span>지켜야 할 조건</span></div>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="research-title">
+      <div class="section-head">
+        <span class="number">1</span>
+        <div>
+          <h2 id="research-title">AI 최신 정보 반복 작업</h2>
+          <p>조사에 사용할 모델과 진행 방식을 먼저 고정합니다.</p>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <article class="summary-card">
+          <h3>사용 모델</h3>
+          <p>GPT-5.6 Sol</p>
+          <p>추론 수준: 높음</p>
+        </article>
+        <article class="summary-card">
+          <h3>조사 방식</h3>
+          <p>심층 리서치</p>
+          <p>단순 수집이 아니라 검증과 비교까지 진행</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="analysis-title">
+      <div class="section-head">
+        <span class="number">2</span>
+        <div>
+          <h2 id="analysis-title">어떤 기준을 가지고 분석할 것인가</h2>
+          <p>정보의 정확성, 출처, 최신성과 변화 여부를 순서대로 검증합니다.</p>
+        </div>
+      </div>
+
+      <article class="group">
+        <h3>거짓 정보 검증</h3>
+        <ul>
+          <li>존재하지 않는 기능을 사실처럼 작성하지 않는가?</li>
+          <li>확인하지 않은 가격·날짜·사용량을 생성하지 않는가?</li>
+          <li>추정과 사실을 구분하는가?</li>
+          <li>검색 결과의 요약문만 보고 확정하지 않는가?</li>
+          <li>공식 발표가 없는 내용을 공식 정보처럼 작성하지 않는가?</li>
+        </ul>
+      </article>
+
+      <article class="group">
+        <h3>출처 신뢰도 검증</h3>
+        <ol class="rank-list">
+          <li><span class="rank">1순위</span><span>기업 공식 발표와 공식 문서</span></li>
+          <li><span class="rank">2순위</span><span>공식 기술 문서와 연구 자료</span></li>
+          <li><span class="rank">3순위</span><span>신뢰할 수 있는 주요 언론</span></li>
+          <li><span class="rank">4순위</span><span>전문 기술 매체</span></li>
+          <li><span class="rank">5순위</span><span>사용자 후기와 커뮤니티</span></li>
+        </ol>
+      </article>
+
+      <article class="group">
+        <h3>최신성·중복·변화 검증</h3>
+        <ul>
+          <li>조사 대상 연도가 맞는가?</li>
+          <li>발표일과 기사 작성일을 구분했는가?</li>
+          <li>오래된 기사가 다시 노출된 것은 아닌가?</li>
+          <li>어제 이미 보고한 정보와 중복되지 않는가?</li>
+          <li>어제와 비교해 실제로 달라진 내용이 있는가?</li>
+          <li>배포 상태, 가격, 지원 국가, 기능 조건이 변경되었는가?</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section" aria-labelledby="build-title">
+      <div class="section-head">
+        <span class="number">3</span>
+        <div>
+          <h2 id="build-title">지켜야 할 조건 수립 및 최종 구축</h2>
+          <p>예약 작업이 반복 실행될 때 지켜야 할 조건을 다섯 범주로 정리합니다.</p>
+        </div>
+      </div>
+
+      <div class="conditions">
+        <article class="condition-card">
+          <h3>시간 조건</h3>
+          <ul>
+            <li>실행 시간</li>
+            <li>매일 / 평일 / 매주</li>
+            <li>Asia/Seoul 기준</li>
+            <li>첫 실행 조사 기간</li>
+            <li>이후 실행 조사 기간</li>
+          </ul>
+        </article>
+
+        <article class="condition-card">
+          <h3>정보 조건</h3>
+          <ul>
+            <li>조사할 직무</li>
+            <li>조사할 AI 서비스</li>
+            <li>조사 대상 연도</li>
+            <li>우선 조사 키워드</li>
+            <li>제외할 정보</li>
+          </ul>
+        </article>
+
+        <article class="condition-card">
+          <h3>정확성 조건</h3>
+          <ul>
+            <li>공식 출처 우선</li>
+            <li>출처 링크 표시</li>
+            <li>확인 상태 표시</li>
+            <li>사실과 분석 구분</li>
+            <li>확인되지 않은 내용은 추측 금지</li>
+          </ul>
+        </article>
+
+        <article class="condition-card">
+          <h3>비교 조건</h3>
+          <ul>
+            <li>이전 실행 결과와 중복 제거</li>
+            <li>어제와 오늘의 차이 비교</li>
+            <li>변경된 내용만 다시 보고</li>
+            <li>변경이 없으면 없다고 표시</li>
+          </ul>
+        </article>
+
+        <article class="condition-card">
+          <h3>출력 조건</h3>
+          <ul>
+            <li>아침에 빠르게 읽을 수 있는 분량</li>
+            <li>직무 정보는 2~3줄 요약</li>
+            <li>핵심 AI 업데이트는 최대 3개</li>
+            <li>중요하지 않은 정보로 개수를 채우지 않음</li>
+            <li>실제 확인하거나 실행할 항목 제시</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="check-title">
+      <div class="section-head">
+        <span class="number">✓</span>
+        <div>
+          <h2 id="check-title">프롬프트 체크리스트</h2>
+          <p>첫 실행 결과가 조사·검증·출력 조건을 충족했는지 확인합니다.</p>
+        </div>
+      </div>
+
+      <ol class="checklist">
+        <li>첫 실행 조사 기간이 최근 7일인가?</li>
+        <li>웹 검색을 실제로 사용했는가?</li>
+        <li>핵심 업데이트가 3개 이하인가?</li>
+        <li>중요하지 않은 일반 AI 뉴스가 제외됐는가?</li>
+        <li>각 항목에 발표일 또는 변경일이 있는가?</li>
+        <li>발표일과 기사 게시일을 구분했는가?</li>
+        <li>핵심 정보에 공식 출처가 있는가?</li>
+        <li>가격·플랜·크레딧을 공식 페이지에서 확인했는가?</li>
+        <li>순차 배포·베타·국가·요금제 제한을 표시했는가?</li>
+        <li>강의 자료 반영 필요 여부가 명확한가?</li>
+        <li>학생 실습 아이디어가 실제 수업에 적용 가능한가?</li>
+        <li>동일 발표를 여러 항목으로 중복 작성하지 않았는가?</li>
+        <li>오래된 기사나 재게시 기사가 포함되지 않았는가?</li>
+        <li>확인 전 정보를 사실처럼 작성하지 않았는가?</li>
+        <li>직접 연결되는 출처 링크가 정상적으로 열리는가?</li>
+        <li>주요 정보가 없을 때 지정된 한 문장만 출력하는가?</li>
+      </ol>
+
+      <aside class="failure">
+        <h3>다음 중 하나라도 발생하면 첫 실행은 실패로 판단합니다.</h3>
+        <ol>
+          <li>존재하지 않는 링크</li>
+          <li>잘못된 가격·날짜·지원 국가</li>
+          <li>공식 확인이 없는 내용을 공식 확인으로 표시</li>
+          <li>이전 발표를 신규 발표로 오인</li>
+          <li>중요 정보를 만들거나 추정하여 작성</li>
+        </ol>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>
