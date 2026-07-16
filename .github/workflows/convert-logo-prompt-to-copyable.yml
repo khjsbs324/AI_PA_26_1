@@ -1,0 +1,24 @@
+name: Convert logo prompt to copyable card
+
+on:
+  push:
+    paths:
+      - '.github/workflows/convert-logo-prompt-to-copyable.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update lesson page
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          index
