@@ -1,0 +1,138 @@
+name: Add learning memo once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-learning-memo-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-lesson-page:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Add learning memo to existing lesson page
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          page = Path('index.html')
+          workflow = Path('.github/workflows/add-learning-memo-once.yml')
+          text = page.read_text(encoding='utf-8')
+
+          if 'const learningMemoText =' not in text:
+              memo_constant = '''      const learningMemoText = `*빠른 작업을 위해 내가 필요한 정보를
+          시간대에 맞춰서 자동으로 출력
+
+          1.내 관련 직무 정보(관련 정보, 취업 정보)
+          *아침에 슥 읽기 좋게 2~3줄 요약
+          2.AI에 관련된 최신 정보
+           -내가 원하는 시간
+           -내가 원하는 요약정도
+           -내가 원하는 정보(정확성)
+           -연도
+           -어제와 오늘 정보 비교 필요성
+          3.---
+
+          (조사) 핵심 키워드
+          (분석) 기준
+          (구축) 조건
+
+          1.AI 최신 정보, 반복 작업
+           -(모델)5.6Sol 높음
+           -(어떤 방식)심층 리서치
+          2.어떤 기준을 가지고 분석
+           -거짓 검증(할루시네이션)
+           -()
+           -()
+          3.지켜야할 조건 수립 최종 구축
+
+
+          (프롬프트 작성 조건)
+          -사용 예정 모델
+          -목적
+          -타겟(어떤 상태 사람)
+          -진행 내용`;
+
+'''
+              try_anchor = "      try{\n        const [originalHtml, promptHtml] = await Promise.all(["
+              if try_anchor not in text:
+                  raise SystemExit('Could not find insertion point for learningMemoText')
+              text = text.replace(try_anchor, memo_constant + try_anchor, 1)
+
+              style_anchor = "          .entj-prompt-section{background:linear-gradient(180deg,#f7f9ff 0%,#ffffff 100%)}\n"
+              style_addition = """          .learning-memo-section{background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%)}
+          .learning-memo-block{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}
+          .learning-memo-block h3{margin:0 0 14px;color:var(--ink);font-size:22px;line-height:1.4;letter-spacing:-.03em}
+          .learning-memo-block pre{margin:0;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.8;overflow:auto}
+          .learning-memo-block code{display:block;padding-right:38px;font-size:15px}
+"""
+              if style_anchor not in text:
+                  raise SystemExit('Could not find style insertion point')
+              text = text.replace(style_anchor, style_anchor + style_addition, 1)
+
+              nav_anchor = "        const section = originalDoc.createElement('section');"
+              nav_addition = """        if(nav && !nav.querySelector('a[href=\"#learning-memo\"]')){
+          const link = originalDoc.createElement('a');
+          link.href = '#learning-memo';
+          link.textContent = '학습메모';
+          nav.insertBefore(link, wrapupNav || null);
+        }
+
+"""
+              if nav_anchor not in text:
+                  raise SystemExit('Could not find navigation insertion point')
+              text = text.replace(nav_anchor, nav_addition + nav_anchor, 1)
+
+              section_anchor = "        entjSection.querySelector('code').textContent = entjPromptText;\n"
+              section_addition = """
+
+        const learningMemoSection = originalDoc.createElement('section');
+        learningMemoSection.id = 'learning-memo';
+        learningMemoSection.className = 'section learning-memo-section';
+        learningMemoSection.setAttribute('aria-labelledby', 'learning-memo-title');
+        learningMemoSection.innerHTML = `
+          <div class="section-title">
+            <p class="number">학습 메모</p>
+            <h2 id="learning-memo-title">예약 작업 기반 반복 리서치 설계</h2>
+            <p>필요한 정보를 정해진 시간에 자동으로 조사·검증·요약하기 위한 수업 메모입니다.</p>
+          </div>
+          <article class="learning-memo-block">
+            <h3>조사·분석·구축 기준 메모</h3>
+            <pre><code></code></pre>
+          </article>
+        `;
+        learningMemoSection.querySelector('code').textContent = learningMemoText;
+"""
+              if section_anchor not in text:
+                  raise SystemExit('Could not find section insertion point')
+              text = text.replace(section_anchor, section_anchor + section_addition, 1)
+
+              insert_anchor = "          wrapup.parentNode.insertBefore(entjSection, wrapup);"
+              if insert_anchor not in text:
+                  raise SystemExit('Could not find wrapup insertion point')
+              text = text.replace(insert_anchor, insert_anchor + "\n          wrapup.parentNode.insertBefore(learningMemoSection, wrapup);", 1)
+
+              append_anchor = "          originalDoc.querySelector('main').appendChild(entjSection);"
+              if append_anchor not in text:
+                  raise SystemExit('Could not find fallback append point')
+              text = text.replace(append_anchor, append_anchor + "\n          originalDoc.querySelector('main').appendChild(learningMemoSection);", 1)
+
+              page.write_text(text, encoding='utf-8')
+
+          workflow.unlink(missing_ok=True)
+          PY
+
+      - name: Commit lesson memo
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/add-learning-memo-once.yml
+          git commit -m "Add scheduled research learning memo to lesson page"
+          git push
