@@ -1,0 +1,54 @@
+name: Restore styles and add logo prompt
+
+on:
+  push:
+    paths:
+      - '.github/workflows/restore-and-add-logo-prompt.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore previous stylesheet and append logo prompt
+        shell: bash
+        run: |
+          git show 38aaf5da53546b1510b7b5dc67652b758cdb860f:style.css > style.css
+          cat >> style.css <<'CSS'
+
+/* 기하학적 심벌 로고 생성 프롬프트: 기존 수업페이지 최하단 */
+body::after{
+  content:"기하학적 심벌 로고 생성 프롬프트\A\A첨부한 이미지를 참고하여 창의적인 기하학적 심벌 로고 시안을 제작해줘.\A\A브랜드명:\A브랜드 분야:\A브랜드 핵심 컨셉:\A브랜드가 주고 싶은 이미지:\A주요 타깃:\A제품 또는 서비스 특징:\A\A참고 이미지의 핵심 요소:\A- 참고 이미지에서 보이는 핵심 형태 1:\A- 참고 이미지에서 보이는 핵심 형태 2:\A- 참고 이미지에서 보이는 핵심 형태 3:\A- 참고 이미지에서 느껴지는 분위기 1:\A- 참고 이미지에서 느껴지는 분위기 2:\A\A라인 드로잉에서 유지할 요소:\A- 유지할 선:\A- 유지할 곡선:\A- 유지할 방향:\A- 유지할 반복 구조:\A- 유지할 대칭 또는 비대칭 구조:\A- 유지할 네거티브 스페이스:\A- 유지할 전체 실루엣:\A\A변형할 요소:\A- 단순화할 부분:\A- 제거할 부분:\A- 확대하거나 강조할 부분:\A- 반복할 부분:\A- 회전 또는 반전할 부분:\A- 연결하거나 분리할 부분:\A- 기하학적으로 재구성할 부분:\A\A로고 방향:\A- 참고 이미지의 형태를 그대로 복사하지 말고, 이미지에서 추출한 선, 방향, 반복, 대칭, 여백, 실루엣 구조만 활용해 새로운 심벌로 재해석해줘.\A- 브랜드의 핵심 컨셉과 키워드가 형태에서 느껴지도록 제작해줘.\A- 원형, 반원, 아치, 곡선, 직선, 반복선, 중첩, 분리, 연결, 대칭, 비대칭 중 브랜드에 적합한 구조를 활용해줘.\A- 실제 사물을 직접적으로 묘사하기보다 추상적이고 상징적인 형태로 표현해줘.\A- 작은 크기로 줄여도 형태가 구분될 수 있도록 단순하고 응집력 있는 실루엣으로 정리해줘.\A- 패키지, 웹사이트, 아이콘, 패턴으로 확장할 수 있는 구조로 제작해줘.\A- 브랜드명 텍스트는 넣지 말고 심벌마크만 제작해줘.\A\A원하는 형태:\A- 전체 형태:\A- 직선 또는 곡선 중심:\A- 대칭 또는 비대칭:\A- 두꺼운 선 또는 얇은 선:\A- 닫힌 형태 또는 열린 형태:\A- 단순한 형태 또는 장식적인 형태:\A- 정적인 느낌 또는 움직임이 느껴지는 형태:\A\A원하는 브랜드 분위기:\A- 핵심 감정:\A- 시각적 인상:\A- 고급스러움 정도:\A- 친근함 정도:\A- 자연스러움 정도:\A- 역동성 정도:\A- 미니멀함 정도:\A\A스타일:\A- 창의적인 기하학적 심벌 로고\A- 미니멀한 벡터 로고\A- 추상적이고 조형적인 심벌마크\A- 균형이 안정적인 구조\A- 명확한 흑백 실루엣\A- 흰 배경\A- 검정 단색\A- 플랫 디자인\A- 로고 제작 전 아이디어 스케치\A- 연필로 러프하게 스케치한 형태\A- 손으로 탐색한 듯한 자연스러운 드로잉\A- 각 시안의 구조가 명확하게 구분되는 구성\A\A제외할 요소:\A- 참고 이미지를 그대로 따라 그리는 방식 제외\A- 실제 사물을 사진처럼 묘사하는 방식 제외\A- 기존 브랜드 로고와 유사한 형태 제외\A- 유명 로고를 조합한 형태 제외\A- 텍스트와 브랜드명 제외\A- 알파벳이나 한글을 직접적으로 넣는 방식 제외\A- 3D 표현 제외\A- 금속 질감 제외\A- 그림자 제외\A- 그라데이션 제외\A- 목업 제외\A- 배경 장면 제외\A- 복잡한 일러스트 제외\A- 과도한 장식 제외\A- 지나치게 많은 선 제외\A- 작은 크기에서 형태가 뭉개지는 구조 제외\A- 흔한 아이콘이나 클립아트 같은 형태 제외\A- 브랜드 컨셉과 관계없는 요소 제외\A\A실제 이미지를 그대로 복사하지 말고\A이미지에서 발견한 선, 방향, 반복, 대칭, 비대칭,\A중첩, 여백, 네거티브 스페이스, 실루엣 구조를 활용해\A추상적인 흑백 심벌 스케치로 재해석해줘.\A\A텍스트와 브랜드명은 넣지 말고\A심벌 형태만 제작해줘.\A\A흰 배경에 검정 단색으로 표현하고\A서로 다른 방향의 연필 스케치 시안 6개를 한 화면에 보여줘.\A\A각 시안은 다음 방향으로 구분해줘.\A1. 원형 또는 타원형 구조\A2. 좌우 대칭 구조\A3. 유기적인 곡선 구조\A4. 반복과 중첩을 활용한 구조\A5. 네거티브 스페이스 중심 구조\A6. 가장 단순하게 정리한 미니멀 구조\A\A각 시안은 서로 충분히 다른 형태로 제작하고,\A로고 제작 전 아이디어 탐색 과정처럼 명확하게 구분해 배치해줘.";
+  display:block;
+  max-width:1180px;
+  margin:0 auto 34px;
+  padding:36px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  background:linear-gradient(180deg,#ffffff 0%,#f8faff 100%);
+  color:var(--text);
+  box-shadow:var(--shadow);
+  white-space:pre-wrap;
+  font-size:16px;
+  line-height:1.85;
+  font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  text-align:left;
+}
+@media(max-width:640px){body::after{margin:0 12px 28px;padding:22px;font-size:14px;line-height:1.75;border-radius:20px}}
+CSS
+          rm -f .github/workflows/restore-and-add-logo-prompt.yml
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add style.css .github/workflows/restore-and-add-logo-prompt.yml
+          git commit -m "Add geometric symbol logo prompt to lesson page bottom"
+          git push
