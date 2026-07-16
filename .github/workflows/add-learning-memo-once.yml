@@ -136,3 +136,5 @@ jobs:
           git add index.html .github/workflows/add-learning-memo-once.yml
           git commit -m "Add scheduled research learning memo to lesson page"
           git push
+
+# trigger: 2
