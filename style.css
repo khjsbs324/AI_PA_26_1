@@ -16,3 +16,21 @@ pre{margin:0;white-space:pre-wrap;word-break:break-word}code{font-family:"D2Codi
 .wrapup{background:radial-gradient(circle at 10% 10%,rgba(36,87,255,.22),transparent 30%),linear-gradient(135deg,#10152b 0%,#1b2450 100%);color:var(--white);border:none}.summary-grid{grid-template-columns:1fr 1fr;align-items:stretch}.summary-grid>div{padding:30px;border-radius:var(--radius-lg);background:rgba(255,255,255,.08)}.summary-grid ol{margin:0;padding-left:22px;color:rgba(255,255,255,.82)}.summary-grid li{margin-bottom:10px}.next-box{border:1px solid rgba(255,255,255,.12)}.next-label{display:inline-flex;margin:0 0 12px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);font-weight:900}footer{padding:38px 20px 56px;text-align:center;color:var(--muted)}footer p{margin:0}
 @media(max-width:980px){.goal-grid,.compare-wrap,.structure-grid,.summary-grid,.bad-good{grid-template-columns:1fr}.section{padding:56px 24px;border-radius:24px}.hero{min-height:560px;padding-left:22px;padding-right:22px}.hero-inner{margin-top:80px}.resource-banner{align-items:flex-start;flex-direction:column}.resource-banner .drive-btn{width:100%}}
 @media(max-width:640px){body{line-height:1.65}.hero{min-height:680px}.nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px}.nav a{white-space:nowrap}.hero h1{font-size:40px}.hero-desc{font-size:16px}main{margin-top:-22px}.section{margin-left:12px;margin-right:12px;padding:44px 18px}.section-title h2{font-size:30px}.section-title p:not(.number){font-size:16px}.goal-card,.tool-card,.prompt-card,.summary-grid>div,.day-card{padding:22px}.prompt-top{display:block}.prompt-top span{display:inline-flex;margin-bottom:12px}.formula-box pre,.prompt-card pre,.day-plan-section pre,.day-plan-section .step-item pre,.day-plan-section .extension-box pre{padding:16px!important;font-size:13px!important}.step-item{grid-template-columns:1fr;gap:12px;padding:18px}.step-item>span{width:44px;height:44px;border-radius:14px}.drive-btn{width:100%;font-size:15px}.hero-actions{padding:0 4px}}
+
+/* 강사 기준 프롬프트: 기존 프롬프트 실습 섹션 하단에 표시 */
+#brand-prompts::after{
+  content:"강사 기준 프롬프트 · AI 최신 정보 반복 작업\A\A(조사) 핵심 키워드\A(분석) 기준\A(구축) 조건\A\A1. AI 최신 정보, 반복 작업\A- 모델: GPT-5.6 Sol / 추론 수준 높음\A- 진행 방식: 심층 리서치\A\A■ 2. 어떤 기준을 가지고 분석\A\A[거짓 정보 검증]\A- 존재하지 않는 기능을 사실처럼 작성하지 않는가?\A- 확인하지 않은 가격·날짜·사용량을 생성하지 않는가?\A- 추정과 사실을 구분하는가?\A- 검색 결과의 요약문만 보고 확정하지 않는가?\A- 공식 발표가 없는 내용을 공식 정보처럼 작성하지 않는가?\A\A[출처 신뢰도 검증]\A1순위: 기업 공식 발표와 공식 문서\A2순위: 공식 기술 문서와 연구 자료\A3순위: 신뢰할 수 있는 주요 언론\A4순위: 전문 기술 매체\A5순위: 사용자 후기와 커뮤니티\A\A[최신성·중복·변화 검증]\A- 조사 대상 연도가 맞는가?\A- 발표일과 기사 작성일을 구분했는가?\A- 오래된 기사가 다시 노출된 것은 아닌가?\A- 어제 이미 보고한 정보와 중복되지 않는가?\A- 어제와 비교해 실제로 달라진 내용이 있는가?\A- 배포 상태, 가격, 지원 국가, 기능 조건이 변경되었는가?\A\A■ 3. 지켜야 할 조건 수립 및 최종 구축\A\A[시간 조건]\A- 실행 시간\A- 매일 / 평일 / 매주\A- Asia/Seoul 기준\A- 첫 실행 조사 기간\A- 이후 실행 조사 기간\A\A[정보 조건]\A- 조사할 직무\A- 조사할 AI 서비스\A- 조사 대상 연도\A- 우선 조사 키워드\A- 제외할 정보\A\A[정확성 조건]\A- 공식 출처 우선\A- 출처 링크 표시\A- 확인 상태 표시\A- 사실과 분석 구분\A- 확인되지 않은 내용은 추측 금지\A\A[비교 조건]\A- 이전 실행 결과와 중복 제거\A- 어제와 오늘의 차이 비교\A- 변경된 내용만 다시 보고\A- 변경이 없으면 없다고 표시\A\A[출력 조건]\A- 아침에 빠르게 읽을 수 있는 분량\A- 직무 정보는 2~3줄 요약\A- 핵심 AI 업데이트는 최대 3개\A- 중요하지 않은 정보로 개수를 채우지 않음\A- 실제 확인하거나 실행할 항목 제시\A\A■ 프롬프트 체크리스트\A1. 첫 실행 조사 기간이 최근 7일인가?\A2. 웹 검색을 실제로 사용했는가?\A3. 핵심 업데이트가 3개 이하인가?\A4. 중요하지 않은 일반 AI 뉴스가 제외됐는가?\A5. 각 항목에 발표일 또는 변경일이 있는가?\A6. 발표일과 기사 게시일을 구분했는가?\A7. 핵심 정보에 공식 출처가 있는가?\A8. 가격·플랜·크레딧을 공식 페이지에서 확인했는가?\A9. 순차 배포·베타·국가·요금제 제한을 표시했는가?\A10. 강의 자료 반영 필요 여부가 명확한가?\A11. 학생 실습 아이디어가 실제 수업에 적용 가능한가?\A12. 동일 발표를 여러 항목으로 중복 작성하지 않았는가?\A13. 오래된 기사나 재게시 기사가 포함되지 않았는가?\A14. 확인 전 정보를 사실처럼 작성하지 않았는가?\A15. 직접 연결되는 출처 링크가 정상적으로 열리는가?\A16. 주요 정보가 없을 때 지정된 한 문장만 출력하는가?\A\A※ 다음 중 하나라도 발생하면 첫 실행은 실패로 판단합니다.\A1. 존재하지 않는 링크\A2. 잘못된 가격·날짜·지원 국가\A3. 공식 확인이 없는 내용을 공식 확인으로 표시\A4. 이전 발표를 신규 발표로 오인\A5. 중요 정보를 만들거나 추정하여 작성";
+  display:block;
+  margin-top:34px;
+  padding:30px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:linear-gradient(180deg,#ffffff 0%,#f8faff 100%);
+  color:var(--text);
+  box-shadow:0 14px 34px rgba(23,24,33,.06);
+  white-space:pre-wrap;
+  font-size:16px;
+  line-height:1.85;
+  font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media(max-width:640px){#brand-prompts::after{padding:20px;font-size:14px;line-height:1.75;border-radius:18px}}
