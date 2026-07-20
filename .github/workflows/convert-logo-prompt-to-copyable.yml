@@ -14,11 +14,40 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update lesson page
+      - name: Add copyable logo prompt card
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
+          from html import escape
 
-          index
+          page = Path('brand-prompts.html')
+          workflow = Path('.github/workflows/convert-logo-prompt-to-copyable.yml')
+          text = page.read_text(encoding='utf-8')
+          prompt = Path('logo-symbol-prompt.txt').read_text(encoding='utf-8').strip()
+
+          if 'id="geometric-logo-prompt"' not in text:
+              article = f'''
+      <article id="geometric-logo-prompt" class="prompt-block">
+        <h2>11. 기하학적 심벌 로고 생성 프롬프트</h2>
+        <p class="method">활용 기법: 이미지 구조 분석 + 기하학적 변형 + 네거티브 스페이스 설계</p>
+        <pre><code>{escape(prompt)}</code></pre>
+      </article>
+'''
+              anchor = '    </section>\n  </main>'
+              if anchor not in text:
+                  raise SystemExit('prompt-wrap closing section not found')
+              text = text.replace(anchor, article + '    </section>\n  </main>', 1)
+              page.write_text(text, encoding='utf-8')
+
+          workflow.unlink(missing_ok=True)
+          PY
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand-prompts.html .github/workflows/convert-logo-prompt-to-copyable.yml
+          git commit -m "Add copyable geometric symbol logo prompt card"
+          git push
