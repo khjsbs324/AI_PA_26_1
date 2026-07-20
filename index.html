@@ -16,13 +16,14 @@
   <div class="loading">
     <div class="loading-box">
       <h1>수업페이지를 불러오는 중입니다</h1>
-      <p>체크리스트 영역을 정상적인 복사 카드 구조로 불러옵니다.</p>
+      <p>체크리스트와 AI 강의 업데이트 브리핑 프롬프트를 복사 가능한 카드로 불러옵니다.</p>
     </div>
   </div>
 
   <script>
     (async function(){
       const sourceUrl = 'https://raw.githubusercontent.com/khjsbs324/AI_PA_26_1/4514b5a841392683772412829a995191ed4c87b1/index.html';
+      const briefingPromptUrl = './ai-briefing-prompt.txt';
       const checklistText = `■ 프롬프트 체크리스트
 
 1. 첫 실행 조사 기간이 최근 7일인가?
@@ -51,28 +52,37 @@
 5. 중요 정보를 만들거나 추정하여 작성`;
 
       try{
-        let html = await fetch(sourceUrl).then(response => {
-          if(!response.ok) throw new Error('기존 수업페이지를 불러오지 못했습니다.');
-          return response.text();
-        });
+        const [sourceHtml, briefingPromptText] = await Promise.all([
+          fetch(sourceUrl).then(response => {
+            if(!response.ok) throw new Error('기존 수업페이지를 불러오지 못했습니다.');
+            return response.text();
+          }),
+          fetch(briefingPromptUrl).then(response => {
+            if(!response.ok) throw new Error('AI 강의 업데이트 브리핑 프롬프트를 불러오지 못했습니다.');
+            return response.text();
+          })
+        ]);
+
+        let html = sourceHtml;
 
         html = html.replace(
           '      try{\n',
-          '      const promptChecklistText = ' + JSON.stringify(checklistText) + ';\n\n      try{\n'
+          '      const promptChecklistText = ' + JSON.stringify(checklistText) + ';\n' +
+          '      const aiBriefingPromptText = ' + JSON.stringify(briefingPromptText.trim()) + ';\n\n      try{\n'
         );
 
         html = html.replace(
           '          .personality-section{background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%)}\n',
           '          .personality-section{background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%)}\n' +
-          '          .prompt-checklist-section{background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%)}\n' +
-          '          .prompt-checklist-block{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}\n' +
-          '          .prompt-checklist-block h3{margin:0 0 14px;color:var(--ink);font-size:22px;line-height:1.4;letter-spacing:-.03em}\n' +
-          '          .prompt-checklist-block pre{margin:0;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.8;overflow:auto}\n' +
-          '          .prompt-checklist-block code{display:block;padding-right:38px;font-size:15px}\n' +
+          '          .prompt-checklist-section,.ai-briefing-prompt-section{background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%)}\n' +
+          '          .prompt-checklist-block,.ai-briefing-prompt-block{padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(23,24,33,.05)}\n' +
+          '          .prompt-checklist-block h3,.ai-briefing-prompt-block h3{margin:0 0 14px;color:var(--ink);font-size:22px;line-height:1.4;letter-spacing:-.03em}\n' +
+          '          .prompt-checklist-block pre,.ai-briefing-prompt-block pre{margin:0;max-height:760px;white-space:pre-wrap;word-break:keep-all;background:#111827;color:#eef2ff;border-radius:18px;padding:22px;line-height:1.8;overflow:auto}\n' +
+          '          .prompt-checklist-block code,.ai-briefing-prompt-block code{display:block;padding-right:38px;font-size:15px}\n' +
           '          #brand-prompts::after{content:none!important;display:none!important}\n'
         );
 
-        const checklistSectionCode = `        const promptChecklistSection = originalDoc.createElement('section');
+        const insertedSectionsCode = `        const promptChecklistSection = originalDoc.createElement('section');
         promptChecklistSection.id = 'prompt-checklist';
         promptChecklistSection.className = 'section prompt-checklist-section';
         promptChecklistSection.setAttribute('aria-labelledby', 'prompt-checklist-title');
@@ -89,21 +99,38 @@
         \`;
         promptChecklistSection.querySelector('code').textContent = promptChecklistText;
 
+        const aiBriefingPromptSection = originalDoc.createElement('section');
+        aiBriefingPromptSection.id = 'ai-briefing-prompt';
+        aiBriefingPromptSection.className = 'section ai-briefing-prompt-section';
+        aiBriefingPromptSection.setAttribute('aria-labelledby', 'ai-briefing-prompt-title');
+        aiBriefingPromptSection.innerHTML = \`
+          <div class="section-title">
+            <p class="number">추가 자료</p>
+            <h2 id="ai-briefing-prompt-title">AI 강의 업데이트 브리핑 프롬프트</h2>
+            <p>최신 AI 정보를 웹 검색으로 수집·검증하고, 강의 자료와 학생 실습에 영향을 주는 변화만 선별하는 반복 리서치 프롬프트입니다.</p>
+          </div>
+          <article class="ai-briefing-prompt-block">
+            <h3>AI 강의 업데이트 브리핑 전체 프롬프트</h3>
+            <pre><code></code></pre>
+          </article>
+        \`;
+        aiBriefingPromptSection.querySelector('code').textContent = aiBriefingPromptText;
+
 `;
 
         html = html.replace(
           "        const personalitySection = originalDoc.createElement('section');\n",
-          checklistSectionCode + "        const personalitySection = originalDoc.createElement('section');\n"
+          insertedSectionsCode + "        const personalitySection = originalDoc.createElement('section');\n"
         );
 
         html = html.replace(
           "          wrapup.parentNode.insertBefore(section, wrapup);\n          wrapup.parentNode.insertBefore(personalitySection, wrapup);",
-          "          wrapup.parentNode.insertBefore(section, wrapup);\n          wrapup.parentNode.insertBefore(promptChecklistSection, wrapup);\n          wrapup.parentNode.insertBefore(personalitySection, wrapup);"
+          "          wrapup.parentNode.insertBefore(section, wrapup);\n          wrapup.parentNode.insertBefore(promptChecklistSection, wrapup);\n          wrapup.parentNode.insertBefore(aiBriefingPromptSection, wrapup);\n          wrapup.parentNode.insertBefore(personalitySection, wrapup);"
         );
 
         html = html.replace(
           "          originalDoc.querySelector('main').appendChild(section);\n          originalDoc.querySelector('main').appendChild(personalitySection);",
-          "          originalDoc.querySelector('main').appendChild(section);\n          originalDoc.querySelector('main').appendChild(promptChecklistSection);\n          originalDoc.querySelector('main').appendChild(personalitySection);"
+          "          originalDoc.querySelector('main').appendChild(section);\n          originalDoc.querySelector('main').appendChild(promptChecklistSection);\n          originalDoc.querySelector('main').appendChild(aiBriefingPromptSection);\n          originalDoc.querySelector('main').appendChild(personalitySection);"
         );
 
         document.open();
