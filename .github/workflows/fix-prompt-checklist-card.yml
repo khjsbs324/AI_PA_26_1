@@ -1,0 +1,26 @@
+name: Fix prompt checklist card
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-prompt-checklist-card.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace broken checklist with copyable card
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          index_path = Path('index.html')
+          style_path = Path('style.css')
+          workflow_path = Path('.github/workflows
