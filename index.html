@@ -133,6 +133,11 @@
           "          originalDoc.querySelector('main').appendChild(section);\n          originalDoc.querySelector('main').appendChild(promptChecklistSection);\n          originalDoc.querySelector('main').appendChild(aiBriefingPromptSection);\n          originalDoc.querySelector('main').appendChild(personalitySection);"
         );
 
+        html = html.replace(
+          "        document.open();\n        document.write('<!DOCTYPE html>' + originalDoc.documentElement.outerHTML);",
+          "        const heroActions = originalDoc.querySelector('.hero-actions');\n        if(heroActions && !heroActions.querySelector('[data-cert-cbt-link]')){\n          const certButton = originalDoc.createElement('a');\n          certButton.className = 'drive-btn drive-btn-hero';\n          certButton.href = 'https://khjsbs324.github.io/CBT/';\n          certButton.target = '_blank';\n          certButton.rel = 'noopener noreferrer';\n          certButton.setAttribute('data-cert-cbt-link', 'true');\n          certButton.textContent = '자격증 문제 풀이 시작';\n          heroActions.appendChild(certButton);\n        }\n\n        document.open();\n        document.write('<!DOCTYPE html>' + originalDoc.documentElement.outerHTML);"
+        );
+
         document.open();
         document.write(html);
         document.close();
